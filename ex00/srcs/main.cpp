@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/07 11:46:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/07 13:27:40 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int	parseDay(int dayInt, int monthInt)
 {
 
-	if (dayInt < 0 || dayInt > 31)
-		return (EXIT_FAILURE)
+	if (dayInt < 1 || dayInt > 31)
+		return (EXIT_FAILURE);
 
 	if (dayInt > 29 && monthInt == 2)
 		return (EXIT_FAILURE);
@@ -26,69 +26,102 @@ int	parseDay(int dayInt, int monthInt)
 		(monthInt == 4 || monthInt == 6 || monthInt == 9 || monthInt == 11))
 		return(EXIT_FAILURE);
 
-	return (EXIT_SUCCESS)
-}
-
-int	checkDatesAndValues(std::string line, DatesAndValues &dav, int i)
-{
-	
-	std::string	yearDate = line.substr(0, 4);
-	std::string	monthDate = line.substr(5,2);
-	std::string	dayDate = line.substr(8, 2);
-
-	std::stringstream	yearInt(yearDate);
-	if (yearInt.fail() || (yearInt < 2009 || yearInt > 2022))
-		return (EXIT_FAILURE)
-	else
-		yearInt = dav[i].Date[0];
-
-	std::stringstream	monthInt(monthDate);
-	if (monthInt.fail() || (monthInt < 1 || monthInt > 12))
-		return (EXIT_FAILURE)
-	else
-		yearInt = dav[i].Date[1];
-
-	std::stringstream	dayInt(dayDate);
-	if (dayInt.fail() || parseDay(dayInt, monthInt))
-		return (EXIT_FAILURE)
-	else
-		dayInt = dav[i].Date[2];
-
 	return (EXIT_SUCCESS);
 }
 
-int	parseInputFile(char **argv, DatesAndValues &dav)
+int	checkValues(std::string lineRemainder)
 {
-	if (argv[1].empty() || argv[1] != "input.txt")
+
+	if (lineRemainder[0] != ' ' || lineRemainder[1] != '|' || lineRemainder[2] != ' ')
+		return (EXIT_FAILURE);
+
+	std::stringstream	valueString(lineRemainder.substr(3));
+	float				valueFloat;
+	if (valueString >> valueFloat)
+	{
+		if (valueFloat < 0 || valueFloat > 1000)
+			return (std::cerr << "4\n", EXIT_FAILURE);
+	}
+	else
+		return (std::cerr << "6\n", EXIT_FAILURE);
+	
+	return (EXIT_SUCCESS);
+}
+
+
+int	checkDates(std::string line)
+{
+	
+	std::stringstream	yearString(line.substr(0, 4));
+	std::stringstream	monthString(line.substr(5,2));
+	std::stringstream	dayString(line.substr(8, 2));
+	int					yearInt;
+	int					monthInt;
+	int					dayInt;
+
+	
+	if (yearString >> yearInt)
+	{
+		if (yearInt < 2009 || yearInt > 2022)
+			return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_FAILURE);
+	
+	if (monthString >> monthInt)
+	{
+		if (monthInt < 1 || monthInt > 12)
+			return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_FAILURE);
+
+	if (dayString >> dayInt)
+	{
+		if (parseDay(dayInt, monthInt) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_FAILURE);
+	
+	if (checkValues(line.substr(10)))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+// the fstream function apparently start looking from the working directory
+//  and not directory where the main is in
+int	parseInputFile(char *argv1)
+{
+	if (!argv1 || strcmp(argv1, "input.txt"))
 	{
 		std::cerr << "Error: could not open file." << std::endl;
-		return (EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	}	
 	
-	std::ifstream	inputFile(argv[1]);
-	if (!file)
+	std::ifstream	inputFile("input.txt");
+	if (!inputFile)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
-		return (EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	}
 
 
 	std::string		line;
-	if (std::getline(inputFile, line) != "date | value")
+	std::getline(inputFile, line);
+	if (line != "date | value")
 	{
-		std::cerr << "Error: Input content is not correct" << std::endl;
+		std::cerr << "Error: Input file content is not correct" << std::endl;
 		return (EXIT_FAILURE);
 	}
 
-	int	i = 0;
 	while (std::getline(inputFile, line))
 	{
-		if (checkDatesAndValues(line, dav, i) == EXIT_FAILURE)
+		if (checkDates(line) == EXIT_FAILURE)
 		{
 			std::cerr << "Error: Input content is not correct" << std::endl;
 			return (EXIT_FAILURE);
 		}
-		i++;
 	}
 
 	return (inputFile.close(), EXIT_SUCCESS);
@@ -101,10 +134,10 @@ int main(int argc, char** argv)
 		std::cerr << "Error: could not open file." << std::endl;
 		return (EXIT_FAILURE);
 	}
-	DatesAndValues	dav;
-	if (parseInputFile(argv, dav) != EXIT_FAILURE)
+	if (parseInputFile(argv[1]) != EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
 	
+	// btc	x;
+	// x.executeExchange(argv[1]);
 	return (EXIT_SUCCESS);
 }
