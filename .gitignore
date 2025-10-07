@@ -1,3 +1,10 @@
+# Non git ignore template stuff
+bin
+btc
+RPN
+PmergeMe
+
+
 # Prerequisites
 *.d
 
