@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:21:33 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/07 10:05:05 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/07 11:52:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 
 // CLASSES
 
-
+class DatesAndValues
+{
+	public:
+		int	*Date[3];
+		int value;	
+}
 
 #endif
