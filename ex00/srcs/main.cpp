@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 11:36:47 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:55:24 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	checkDates(std::string line)
 
 // the fstream function apparently start looking from the working directory
 //  and not directory where the main is in
-int	parseInputFile(char *argv1)
+int	parseInputFile(char* argv1)
 {
 	if (!argv1 || strcmp(argv1, "input.txt"))
 	{
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 	if (parseInputFile(argv[1]) != EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	
-	// btc	x;
-	// x.executeExchange(argv[1]);
+	btc	x;
+	x.executeExchange(argv[1]);
 	return (EXIT_SUCCESS);
 }

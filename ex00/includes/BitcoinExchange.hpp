@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:21:33 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/07 13:13:35 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:54:45 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,22 @@
 # include <cstring>
 # include <sstream>
 # include <fstream>
+# include <map>
 
 // CLASSES
 
-class btc
+class Btc
 {
+	private:
+		std::map<std::string, float>	exchangeData;
 	public:
+	// Constructors
+		Btc();
+		Btc(Btc& src);
+		Btc& operator=(Btc& src);
+		~Btc();
+	
+	// Member functions
 		void	executeExchange(char *argv1);
 };
 
