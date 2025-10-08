@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 11:55:24 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 12:35:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ int	checkDates(std::string line)
 	int					dayInt;
 
 	yearString >> yearInt;
-	if (yearString.fail() || yearInt < 2009 || yearInt > 2022)
+	if (yearString.fail())
 		return (EXIT_FAILURE);
 	
 	monthString >> monthInt;
-	if (monthString.fail() || monthInt < 1 || monthInt > 12)
+	if (monthString.fail())
 			return (EXIT_FAILURE);
 
 	dayString >> dayInt;
-	if (dayString.fail() || parseDay(dayInt, monthInt) == EXIT_FAILURE)
+	if (dayString.fail())
 			return (EXIT_FAILURE);
 	
 	if (checkValues(line.substr(10)))
