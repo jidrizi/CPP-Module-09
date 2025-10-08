@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 11:24:05 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:36:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	checkValues(std::string lineRemainder)
 
 	std::stringstream	valueString(lineRemainder.substr(3));
 	float				valueFloat;
-	valueString >> valueFloat
+	valueString >> valueFloat;
 	if (valueString.fail() || valueFloat < 0 || valueFloat > 1000)
 			return (EXIT_FAILURE);
 
@@ -48,6 +48,9 @@ int	checkValues(std::string lineRemainder)
 int	checkDates(std::string line)
 {
 	
+	if (line.size() < 14)
+		return (EXIT_FAILURE);
+
 	std::stringstream	yearString(line.substr(0, 4));
 	std::stringstream	monthString(line.substr(5,2));
 	std::stringstream	dayString(line.substr(8, 2));
@@ -55,7 +58,6 @@ int	checkDates(std::string line)
 	int					monthInt;
 	int					dayInt;
 
-	
 	yearString >> yearInt;
 	if (yearString.fail() || yearInt < 2009 || yearInt > 2022)
 		return (EXIT_FAILURE);
@@ -70,6 +72,7 @@ int	checkDates(std::string line)
 	
 	if (checkValues(line.substr(10)))
 		return (EXIT_FAILURE);
+
 	return (EXIT_SUCCESS);
 }
 
