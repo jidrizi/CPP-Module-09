@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 17:42:31 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 19:52:13 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int main(int argc, char** argv)
 	std::cout << "\n\nExecute time\n";
 	
 	data.addExchangeData();
-	data.executeExchange();
+	// data.executeExchange();
 
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 17:52:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 19:52:03 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int Btc::addExchangeData()
 
 	for (std::string line; std::getline(dataFile, line); )
 	{
-		std::string			dateString = line.substr(0, 10)
-		std:::stringstream	valueString(line.substr(11));
+		std::string			dateString = line.substr(0, 10);
+		std::stringstream	valueString(line.substr(11));
 		float				valueFloat;
 
 		valueString >> valueFloat;
-		this->exchangeData(dateString) = valueFloat;
+		std::cout << valueFloat;
+		this->exchangeData[dateString] = valueFloat;
 	}
-	
-	return (inputFile.close(), EXIT_SUCCESS);
+
+	return (dataFile.close(), EXIT_SUCCESS);
 }
