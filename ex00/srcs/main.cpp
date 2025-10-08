@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 15:57:27 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:42:31 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ int main(int argc, char** argv)
 	}
 	if (checkInputFile(argv[1], data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
+	std::cout << "\n\nExecute time\n";
+	
+	data.addExchangeData();
 	data.executeExchange();
+
 	return (EXIT_SUCCESS);
 }

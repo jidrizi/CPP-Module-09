@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 15:04:19 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:52:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,26 @@ Btc::~Btc()
 
 
 // Member functions
-void Btc::executeExchange()
-{
 
-	std::cout << "\n\nExecute time\n";
-	
+int Btc::addExchangeData()
+{	
 	// remember fstream starts looking from working dir
-	std::ifstream	inputFile("input.txt");
-	if (!inputFile)
+	std::ifstream	dataFile("data.csv");
+	if (!dataFile)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
-		return ;
+		return (EXIT_FAILURE);
 	}
 
-	std::string			skipFirstLine;
-	std::getline(inputFile, skipFirstLine);
-
-	
-	int					i = 1;
-	for (std::string line; std::getline(inputFile, line); i++)
+	for (std::string line; std::getline(dataFile, line); )
 	{
-		if (this->errorData[i] == "error")
-			continue ;
-
-		std::stringstream	valueString(line.substr(13));
+		std::string			dateString = line.substr(0, 10)
+		std:::stringstream	valueString(line.substr(11));
 		float				valueFloat;
+
 		valueString >> valueFloat;
-		std::cout << valueFloat << std::endl;
+		this->exchangeData(dateString) = valueFloat;
 	}
+	
+	return (inputFile.close(), EXIT_SUCCESS);
 }
