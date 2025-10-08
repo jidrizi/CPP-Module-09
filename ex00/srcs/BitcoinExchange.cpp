@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 12:02:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 15:04:19 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,32 @@ Btc::~Btc()
 
 
 // Member functions
-Btc::executeExchange(char* argv1)
+void Btc::executeExchange()
 {
+
+	std::cout << "\n\nExecute time\n";
 	
+	// remember fstream starts looking from working dir
+	std::ifstream	inputFile("input.txt");
+	if (!inputFile)
+	{
+		std::cerr << "Error: could not open file." << std::endl;
+		return ;
+	}
+
+	std::string			skipFirstLine;
+	std::getline(inputFile, skipFirstLine);
+
+	
+	int					i = 1;
+	for (std::string line; std::getline(inputFile, line); i++)
+	{
+		if (this->errorData[i] == "error")
+			continue ;
+
+		std::stringstream	valueString(line.substr(13));
+		float				valueFloat;
+		valueString >> valueFloat;
+		std::cout << valueFloat << std::endl;
+	}
 }
