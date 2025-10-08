@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:21:33 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 19:52:17 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 20:24:08 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ class Btc
 	// Members
 		std::map<int, std::string>		errorData;
 		int 	addExchangeData();
-		// void	executeExchange();
+		int		executeExchange();
+		void	findAndMulitply(std::string line);
 };
+
+void	printError(std::string line, Btc& x, int i);
 
 #endif

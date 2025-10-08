@@ -6,11 +6,24 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 19:52:13 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 20:18:44 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+
+int	printError(std::string line, Btc& x, int i)
+{
+	if (x.errorData[i] == "Error: bad input => ")
+		return (std::cerr << "Error: bad input => " << line << std::endl, 1)
+	else if (x.errorData[i] == "Error: not a positive number.")
+		return (std::cerr << "Error: not a positive number." << line << std::endl, 1)
+	else if (x.errorData[i] == "Error: too large a number.")
+		return (std::cerr << "Error: too large a number." << line << std::endl, 1)
+
+	return (0);
+}
+
 
 int	checkValues(std::string lineRemainder, Btc& x, int i)
 {
@@ -113,6 +126,7 @@ int	checkInputFile(char* argv1, Btc& x)
 int main(int argc, char** argv)
 {
 	Btc	data;
+
 	if (argc != 2)
 	{
 		std::cerr << "Error: could not open file." << std::endl;
@@ -120,10 +134,12 @@ int main(int argc, char** argv)
 	}
 	if (checkInputFile(argv[1], data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	std::cout << "\n\nExecute time\n";
-	
-	data.addExchangeData();
-	// data.executeExchange();
+
+
+	if (data.addExchangeData() == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (data.executeExchange() == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 19:52:03 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 20:24:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,31 @@ int Btc::addExchangeData()
 	}
 
 	return (dataFile.close(), EXIT_SUCCESS);
+}
+
+void	findAndMulitply(std::string line)
+{
+	
+}
+
+int	Btc::executeExchange()
+{
+	std::ifstream	inputFile("input.txt");
+	if (!inputFile)
+	{
+		std::cerr << "Error: could not open file." << std::endl;
+		return (EXIT_FAILURE);
+	}
+
+	std::string	line;
+	std::getline(inputFile, line);
+	printError(line, *this, i);
+	while (std::getline(inputFile, line))
+	{
+		if (printError(line, *this, i))
+			continue ;
+		
+	}
+
+	return (inputFile.close(), EXIT_SUCCESS);
 }
