@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:21:33 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 11:54:45 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 13:27:17 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 
 // MACROS
+
+# ifndef MIDDLE_PART_BAD_INPUT
+#  define MIDDLE_PART_BAD_INPUT 2
+# endif
+
+# ifndef INVALID_LINES
+#  define INVALID_LINES 1
+# endif
+
 # ifndef EXIT_FAILURE
 #  define EXIT_FAILURE 1
 # endif
@@ -44,7 +53,8 @@ class Btc
 		Btc& operator=(Btc& src);
 		~Btc();
 	
-	// Member functions
+	// Members
+		std::map<int, std::string>		errorData;
 		void	executeExchange(char *argv1);
 };
 

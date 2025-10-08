@@ -8,7 +8,7 @@ all: $(NAME)
 
 SRCDIR = srcs/
 
-SRCS = $(SRCDIR)main.cpp
+SRCS = $(SRCDIR)main.cpp $(SRCDIR)BitcoinExchange.cpp
 
 BIN_DIR = bin
 
