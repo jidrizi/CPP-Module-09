@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/07 13:27:40 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/08 11:24:05 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,16 @@ int	parseDay(int dayInt, int monthInt)
 
 int	checkValues(std::string lineRemainder)
 {
-
-	if (lineRemainder[0] != ' ' || lineRemainder[1] != '|' || lineRemainder[2] != ' ')
+	if (lineRemainder[0] != ' ' || lineRemainder[1] != '|' 
+				|| lineRemainder[2] != ' ')
 		return (EXIT_FAILURE);
 
 	std::stringstream	valueString(lineRemainder.substr(3));
 	float				valueFloat;
-	if (valueString >> valueFloat)
-	{
-		if (valueFloat < 0 || valueFloat > 1000)
-			return (std::cerr << "4\n", EXIT_FAILURE);
-	}
-	else
-		return (std::cerr << "6\n", EXIT_FAILURE);
-	
+	valueString >> valueFloat
+	if (valueString.fail() || valueFloat < 0 || valueFloat > 1000)
+			return (EXIT_FAILURE);
+
 	return (EXIT_SUCCESS);
 }
 
@@ -60,29 +56,17 @@ int	checkDates(std::string line)
 	int					dayInt;
 
 	
-	if (yearString >> yearInt)
-	{
-		if (yearInt < 2009 || yearInt > 2022)
-			return (EXIT_FAILURE);
-	}
-	else
+	yearString >> yearInt;
+	if (yearString.fail() || yearInt < 2009 || yearInt > 2022)
 		return (EXIT_FAILURE);
 	
-	if (monthString >> monthInt)
-	{
-		if (monthInt < 1 || monthInt > 12)
+	monthString >> monthInt;
+	if (monthString.fail() || monthInt < 1 || monthInt > 12)
 			return (EXIT_FAILURE);
-	}
-	else
-		return (EXIT_FAILURE);
 
-	if (dayString >> dayInt)
-	{
-		if (parseDay(dayInt, monthInt) == EXIT_FAILURE)
+	dayString >> dayInt;
+	if (dayString.fail() || parseDay(dayInt, monthInt) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-	}
-	else
-		return (EXIT_FAILURE);
 	
 	if (checkValues(line.substr(10)))
 		return (EXIT_FAILURE);
