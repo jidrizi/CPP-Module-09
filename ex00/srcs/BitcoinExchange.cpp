@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/09 11:57:33 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:10:11 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ Btc::~Btc()
 
 
 // Member functions
+
+// std::string	getClosestDate(std::string line)
+// {
+	
+// }
+
 
 int	Btc::findAndMulitply(std::string line)
 {
