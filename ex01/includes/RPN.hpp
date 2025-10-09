@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jidrizi <jidrizi@student.42.fr>            #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-09 17:27:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2025-10-09 17:27:29 by jidrizi          ###   ########he        */
+/*   Created: 2025-10-09 17:10:38 by jidrizi           #+#    #+#             */
+/*   Updated: 2025-10-09 17:10:38 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
+#ifndef RPN_HPP
+# define RPN_HPP
 
-int	main(int argc, char** argv)
-{
-	if (argc != 2)
-		return (std::cerr << "Error: incorrect number of args", EXIT_FAILURE)
-}
+# include <string>
+# include <iostream>
+# include <stack>
+
+
+
+#endif

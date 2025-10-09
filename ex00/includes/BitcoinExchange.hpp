@@ -16,14 +16,6 @@
 
 // MACROS
 
-# ifndef MIDDLE_PART_BAD_INPUT
-#  define MIDDLE_PART_BAD_INPUT 2
-# endif
-
-# ifndef INVALID_LINES
-#  define INVALID_LINES 1
-# endif
-
 # ifndef EXIT_FAILURE
 #  define EXIT_FAILURE 1
 # endif
