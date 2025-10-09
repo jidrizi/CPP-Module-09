@@ -58,7 +58,6 @@ class Btc
 		int 			addExchangeData();
 		int				executeExchange();
 		int				findAndMulitply(std::string line);
-		// std::string	getClosestDate(std::string inputDate);
 };
 
 int	printError(std::string line, Btc& x, int i);

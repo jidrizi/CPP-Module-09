@@ -41,12 +41,7 @@ Btc::~Btc()
 
 // Member functions
 
-// std::string	getClosestDate(std::string line)
-// {
-	
-// }
-
-
+/* getting the closest date weirded me out a little bit for a second*/
 int	Btc::findAndMulitply(std::string line)
 {
 	std::string			inputDate = line.substr(0, 10);
@@ -58,11 +53,24 @@ int	Btc::findAndMulitply(std::string line)
 		return (EXIT_FAILURE);
 
 	std::map<std::string, float>::iterator	it 
-			= this->exchangeData.lower_bound(inputDate);
+		= this->exchangeData.lower_bound(inputDate);
+	float newInputValue;
 
-	float newInputValue = inputValue * it->second;
-	std::cout << inputDate << " => " << inputValue
-		<<	" = " << newInputValue << std::endl;
+	if (it != this->exchangeData.end() && it->first == inputDate)
+	{
+		newInputValue = inputValue * it->second;
+		std::cout << inputDate << " => " << inputValue
+			<<	" = " << newInputValue << std::endl;
+	}
+	else if (it == this->exchangeData.begin())
+		std::cerr << "Error: no lower closest date exist for this key" << std::endl;
+	else
+	{
+		--it;
+		newInputValue = inputValue * it->second;
+		std::cout << inputDate << " => " << inputValue
+			<<	" = " << newInputValue << std::endl;
+	}
 
 	return (EXIT_SUCCESS);
 }
