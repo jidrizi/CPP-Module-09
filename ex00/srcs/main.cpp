@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 09:20:59 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/08 20:18:44 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/09 11:10:16 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	printError(std::string line, Btc& x, int i)
 {
 	if (x.errorData[i] == "Error: bad input => ")
-		return (std::cerr << "Error: bad input => " << line << std::endl, 1)
+		return (std::cerr << "Error: bad input => " << line << std::endl, EXIT_FAILURE);
 	else if (x.errorData[i] == "Error: not a positive number.")
-		return (std::cerr << "Error: not a positive number." << line << std::endl, 1)
+		return (std::cerr << "Error: not a positive number."  << std::endl, EXIT_FAILURE);
 	else if (x.errorData[i] == "Error: too large a number.")
-		return (std::cerr << "Error: too large a number." << line << std::endl, 1)
+		return (std::cerr << "Error: too large a number."  << std::endl, EXIT_FAILURE);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 
