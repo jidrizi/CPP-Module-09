@@ -19,7 +19,7 @@ Btc::Btc()
 			<< std::endl;
 }
 
-Btc::Btc(Btc& src) : exchangeData(src.exchangeData)
+Btc::Btc(Btc& src) : exchangeData(src.exchangeData), errorData(src.errorData)
 {
 	std::cout << "\033[32mBtc copy constructor called.\033[0m" << std::endl;
 }
@@ -29,7 +29,10 @@ Btc& Btc::operator=(Btc& src)
 	std::cout << "\033[32mBtc copy assigment operator called.\033[0m" 
 			<< std::endl;
 	if (this != &src)
+	{
 		this->exchangeData = src.exchangeData;
+		this->errorData = src.errorData;
+	}
 	return (*this);
 }
 
