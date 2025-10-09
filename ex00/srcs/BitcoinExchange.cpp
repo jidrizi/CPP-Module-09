@@ -58,9 +58,7 @@ int	Btc::findAndMulitply(std::string line)
 		return (EXIT_FAILURE);
 
 	std::map<std::string, float>::iterator	it 
-			= this->exchangeData.find(inputDate);
-	if (it == this->exchangeData.end())
-		it = this->exchangeData.lower_bound(inputDate);
+			= this->exchangeData.lower_bound(inputDate);
 
 	float newInputValue = inputValue * it->second;
 	std::cout << inputDate << " => " << inputValue
