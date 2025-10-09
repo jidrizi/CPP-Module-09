@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 11:56:35 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/09 12:10:11 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/09 14:41:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,12 @@ int	Btc::findAndMulitply(std::string line)
 
 	std::map<std::string, float>::iterator	it 
 			= this->exchangeData.find(inputDate);
-	if (it != this->exchangeData.end())
-	{
-		// inputDate = this->getClosestDate(inputDate);
-		float newInputValue = inputValue * it->second;
-		std::cout << inputDate << " => " << inputValue
-			<<	" = " << newInputValue << std::endl;
-	}
-	else
-		std::cout << "date doesnt exist\n";
+	if (it == this->exchangeData.end())
+		it = this->exchangeData.lower_bound(inputDate);
+
+	float newInputValue = inputValue * it->second;
+	std::cout << inputDate << " => " << inputValue
+		<<	" = " << newInputValue << std::endl;
 
 	return (EXIT_SUCCESS);
 }
