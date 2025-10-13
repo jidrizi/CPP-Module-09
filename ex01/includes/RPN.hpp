@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 17:10:38 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/13 15:35:30 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/13 16:43:37 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ class RPN
 		~RPN();
 
 		// Members
-		void	RPN::RecieveAndExecute(char* argv1);
+		int		receiveAndExecute(char* argv1);
+		void	receive(char numChar);
+		void	execute(char operand);
 
 };
 
 // FUNCTIONS
 bool	isNum(char	c);
-
+bool	isOperand(char c);
 
 #endif
