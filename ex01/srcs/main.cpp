@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidrizi <jidrizi@student.42.fr>            #+#  +:+       +#+        */
+/*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-09 17:27:29 by jidrizi           #+#    #+#             */
-/*   Updated: 2025-10-09 17:27:29 by jidrizi          ###   ########he        */
+/*   Created: 2025/10/09 17:27:29 by jidrizi           #+#    #+#             */
+/*   Updated: 2025/10/10 13:26:40 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,14 @@ int	checkElements(char *givenEquasion)
 	{
 		if (givenEquasion[i] < '0' || givenEquasion[i] > '9' || givenEquasion[i] != ' ')
 		{
-			if (givenEquasion[i] != '+' || givenEquasion[i] != '-' || givenEquasion[i] != '*' || givenEquasion[i] != '/')
-				return (std::cerr << "Error: elements not correct\n", EXIT_FAILURE);
+			if (givenEquasion[i] != '+' && givenEquasion[i] != '-' && givenEquasion[i] != '*' && givenEquasion[i] != '/')
+				return (std::cerr << "Error: elements are not correct\n", EXIT_FAILURE);
 		}
 	}
 	return (EXIT_SUCCESS);
 }
 
-void	RecieveElements(RPN& stackHolder)
-{
-	
 
-	
-}
 
 
 int	main(int argc, char** argv)
@@ -42,6 +37,7 @@ int	main(int argc, char** argv)
 		return (EXIT_FAILURE);
 	
 	RPN	stackHolder;
+	stackHolder.RecieveAndExecute();
 	
 
 	return (EXIT_SUCCESS);

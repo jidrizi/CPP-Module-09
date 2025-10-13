@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidrizi <jidrizi@student.42.fr>            #+#  +:+       +#+        */
+/*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-09 17:10:38 by jidrizi           #+#    #+#             */
-/*   Updated: 2025-10-09 17:10:38 by jidrizi          ###   ########.fr       */
+/*   Created: 2025/10/09 17:10:38 by jidrizi           #+#    #+#             */
+/*   Updated: 2025/10/10 13:27:29 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ class RPN
 	private:
 		std::stack<int>	rpnStack;
 	public:
+		// Constructors
 		RPN();
 		RPN(RPN& src);
 		RPN&	operator=(RPN& src);
 		~RPN();
+
+		// Members
+		void	RPN::RecieveAndExecute();
+
 };
 
 #endif

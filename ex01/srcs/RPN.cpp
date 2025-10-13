@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidrizi <jidrizi@student.42.fr>            #+#  +:+       +#+        */
+/*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-09 18:20:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2025-10-09 18:20:19 by jidrizi          ###   ########he        */
+/*   Created: 2025/10/09 18:20:19 by jidrizi           #+#    #+#             */
+/*   Updated: 2025/10/10 14:29:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,8 @@ RPN::~RPN()
 
 
 // Member functions
+
+void	RPN::RecieveAndExecute()
+{
+
+}
