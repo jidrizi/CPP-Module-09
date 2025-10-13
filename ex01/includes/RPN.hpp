@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 17:10:38 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/10 13:27:29 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:35:30 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@
 # include <iostream>
 # include <stack>
 
-//CLASSES
+// CLASSES
 
 class RPN
 {
 	private:
+		int				numAmountInStack;
 		std::stack<int>	rpnStack;
 	public:
 		// Constructors
@@ -41,8 +42,12 @@ class RPN
 		~RPN();
 
 		// Members
-		void	RPN::RecieveAndExecute();
+		void	RPN::RecieveAndExecute(char* argv1);
 
 };
+
+// FUNCTIONS
+bool	isNum(char	c);
+
 
 #endif
