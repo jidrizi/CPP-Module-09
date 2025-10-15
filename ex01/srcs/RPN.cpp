@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:20:19 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/13 16:57:44 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/15 14:43:23 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	RPN::receive(char numChar)
 	int	numInt = numChar - '0';
 	this->rpnStack.push(numInt);
 	this->numAmountInStack++;
-	std::cout << "received :" << numInt << "\t currect amount of numbers: " << this->numAmountInStack << "\n";
 }
 
 void	RPN::execute(char operand)
@@ -63,16 +62,15 @@ void	RPN::execute(char operand)
 	this->rpnStack.pop();
 	
 	if (operand == '*')
-		result = second * first;
+		result = first * second;
 	else if (operand == '/')
-		result = second / first;
+		result = first / second;
 	else if (operand == '+')
-		result = second + first;
+		result = first + second;
 	else if (operand == '-')
-		result = second - first;
+		result = first - second;
 
 	this->rpnStack.push(result);
-	std::cout << second << " " << operand << " " << first << " = " << result << std::endl;
 }
 
 int		RPN::receiveAndExecute(char* givenEquasion)
@@ -85,12 +83,11 @@ int		RPN::receiveAndExecute(char* givenEquasion)
 			i++;
 
 		if (givenEquasion[i] && isOperand(givenEquasion[i]) == true && this->numAmountInStack < 2)
-			return (EXIT_FAILURE);
+			return (std::cerr << "Error: notation is not correct\n", EXIT_FAILURE);
 		else if (givenEquasion[i] && isOperand(givenEquasion[i]) == true && this->numAmountInStack >= 2)
 			this->execute(givenEquasion[i]);
 		else if (givenEquasion[i] && isOperand(givenEquasion[i]) == false)
 			this->receive(givenEquasion[i]);
-
 		i++;
 	}
 
