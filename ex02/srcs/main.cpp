@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 15:58:28 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 19:54:51 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	main(int argc, char** argv)
 	// if (argc  == 3)
 	// 	executeMini(containerClass);
 	// else
-		containerClass->executeVectorSort(argv);
-		containerClass->executeDequeSort(argv);
+		containerClass.executeVectorSort(argv);
+		// containerClass->executeDequeSort(argv);
 	
 	return (EXIT_SUCCESS);
 }

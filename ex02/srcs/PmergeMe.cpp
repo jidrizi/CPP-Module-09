@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 16:04:37 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 20:47:38 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,18 @@ void	PmergeMe::getVectorElements(std::vector<int>& containerV, char** argv)
 		elementStr >> elementUnsigInt;
 		containerV.push_back(elementUnsigInt);
 
-		argv[0]++;
+		argv++;
 	}
+	std::cout << "Before: ";
+	for (size_t i = 0; i < containerV.size(); i++)
+		std::cout << containerV[i] << " ";
+	std:: cout << std::endl;
 }
 
 
 
 void	PmergeMe::executeVectorSort(char** argv)
 {
-	this->getVectorElements(this->sortingVector, char** argv);
-	
+	this->getVectorElements(this->sortingVector, argv);
+
 }
