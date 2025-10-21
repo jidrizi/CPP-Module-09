@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 15:11:02 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 15:58:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 class PmergeMe
 {
 	private:
-		std::vector<int>	SortingVector;
-		std::deque<int>		SortingDeque;
+		std::vector<int>	sortingVector;
+		std::deque<int>		sortingDeque;
 		
 	public:
 	// Constructors
@@ -49,6 +49,10 @@ class PmergeMe
 		PmergeMe(PmergeMe& src);
 		PmergeMe&	operator=(PmergeMe& src);
 		~PmergeMe();
+	// Members
+		void	getVectorElements(std::vector<int>& container, char** argv);
+		void	executeVectorSort(char** argv);
+		void	executeDequeSort(char** argv);
 	
 };
 

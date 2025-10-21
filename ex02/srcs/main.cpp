@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 15:25:17 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 15:58:28 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	checkDups(char** argv)
 
 	return (EXIT_SUCCESS);
 }
-
-
 
 int	checkArgs(int argc, char** argv)
 {
@@ -63,15 +61,17 @@ int	checkArgs(int argc, char** argv)
 	return (EXIT_SUCCESS);
 }
 
-
-
 int	main(int argc, char** argv)
 {
 	if (checkArgs(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	// not really necessary to do but i can do it guess
-	// if (handleMiniSequence(argc, argv))
-	// 	return (EXIT_SUCCESS);
+
+	PmergeMe	containerClass;
+	// if (argc  == 3)
+	// 	executeMini(containerClass);
+	// else
+		containerClass->executeVectorSort(argv);
+		containerClass->executeDequeSort(argv);
 	
-	
+	return (EXIT_SUCCESS);
 }
