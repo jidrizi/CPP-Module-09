@@ -6,28 +6,59 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/19 18:11:05 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 15:25:17 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+int	checkDups(char** argv)
+{
+	int current = 0;
+	int next = 1;
+
+	while (argv[current])
+	{
+		while (argv[current + next])
+		{
+			if (strcmp(argv[current], argv[current + next]) == 0)
+				return (EXIT_FAILURE);
+			next++;
+		}
+		next = 1;
+		current++;
+	}
+
+	return (EXIT_SUCCESS);
+}
+
+
+
 int	checkArgs(int argc, char** argv)
 {
-	if (argc < 2)
-		return (std::cerr << "Error: not enough arguments.", EXIT_FAILURE);
+	if (argc < 3)
+		return (std::cerr << "Error: not enough arguments.\n", EXIT_FAILURE);
 
-	argv++;
-	while (*argv)
+	int	currStr = 1;
+	int	currChar = 0;
+	while (argv[currStr])
 	{
-		std::stringstream	numberStr(*argv);
-		int					numberInt;
-
-		numberStr >> numberInt;
-		if (numberStr.fail() || numberInt < 0)
-			return (std::cerr << "Error: something wrong with arguments"
-					, EXIT_FAILURE);
+		while (argv[currStr][currChar])
+		{
+			if (argv[currStr][currChar] 
+					&& (argv[currStr][currChar] < '0' || argv[currStr][currChar] > '9'))
+			{
+				return (std::cerr << "Error: only numbers allowed\n", 
+							EXIT_FAILURE);
+			}
+			currChar++;
+		}
+		currChar = 0;
+		currStr++;
 	}
+
+	if (checkDups(argv) == EXIT_FAILURE)
+		return (std::cerr << "Error: no duplicate allowed\n", EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
 }
@@ -38,5 +69,9 @@ int	main(int argc, char** argv)
 {
 	if (checkArgs(argc, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	// not really necessary to do but i can do it guess
+	// if (handleMiniSequence(argc, argv))
+	// 	return (EXIT_SUCCESS);
+	
 	
 }

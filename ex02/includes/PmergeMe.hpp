@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/19 18:09:34 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/10/21 15:11:02 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <utility>
 # include <algorithm>
 # include <climits>
+# include <cstring>
 # include <ctime>
 
 
