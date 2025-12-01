@@ -50,12 +50,13 @@ class PmergeMe
 		PmergeMe&	operator=(PmergeMe& src);
 		~PmergeMe();
 	// Members
-		void	getVectorElements(std::vector<int>& container, char** argv);
-		void	executeVectorSort(char** argv);
-		void	executeDequeSort(char** argv);
+		void	getVectorElements(char** argv);
+		void	executeVectorSort(int n);
 	
 };
 
 // FUNCTIONS
+
+int	findArgQuantity(char **argv);
 
 #endif

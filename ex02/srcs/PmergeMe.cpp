@@ -46,28 +46,29 @@ PmergeMe::~PmergeMe()
 
 // Functions
 
-void	PmergeMe::getVectorElements(std::vector<int>& containerV, char** argv)
+void	PmergeMe::getVectorElements(char** argv)
 {
+
+	argv++;
+	this->sortingVector.reserve(findArgQuantity(argv));
 	while (argv[0])
 	{
 		std::stringstream	elementStr(argv[0]);
 		unsigned int		elementUnsigInt;
 
 		elementStr >> elementUnsigInt;
-		containerV.push_back(elementUnsigInt);
+		this->sortingVector.push_back(elementUnsigInt);
 
 		argv++;
 	}
+
 	std::cout << "Before: ";
-	for (size_t i = 0; i < containerV.size(); i++)
-		std::cout << containerV[i] << " ";
+	for (size_t i = 0; i < this->sortingVector.size(); i++)
+		std::cout << this->sortingVector[i] << " ";
 	std:: cout << std::endl;
 }
 
-
-
-void	PmergeMe::executeVectorSort(char** argv)
-{
-	this->getVectorElements(this->sortingVector, argv);
-
-}
+// void	PmergeMe::executeVectorSort(int n)
+// {
+	
+// }

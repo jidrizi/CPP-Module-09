@@ -12,6 +12,15 @@
 
 #include "PmergeMe.hpp"
 
+int	findArgQuantity(char **argv)
+{
+	int	i = 0;
+	argv++;
+	for ( ; argv[0]; argv++)
+		i++;
+	return (i);
+}
+
 int	checkDups(char** argv)
 {
 	int current = 0;
@@ -67,11 +76,8 @@ int	main(int argc, char** argv)
 		return (EXIT_FAILURE);
 
 	PmergeMe	containerClass;
-	// if (argc  == 3)
-	// 	executeMini(containerClass);
-	// else
-		containerClass.executeVectorSort(argv);
-		// containerClass->executeDequeSort(argv);
+	containerClass.getVectorElements(argv);
+	// containerClass.executeVectorSort(2);
 	
 	return (EXIT_SUCCESS);
 }
