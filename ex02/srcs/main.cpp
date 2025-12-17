@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 19:54:51 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/18 00:24:36 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	findArgQuantity(char **argv)
 {
 	int	i = 0;
-	argv++;
+
 	for ( ; argv[0]; argv++)
 		i++;
 	return (i);

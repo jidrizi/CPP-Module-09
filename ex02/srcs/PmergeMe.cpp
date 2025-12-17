@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/10/21 20:47:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/18 00:24:11 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	PmergeMe::getVectorElements(char** argv)
 {
 
 	argv++;
+	std::cout << findArgQuantity(argv) << std::endl;
 	this->sortingVector.reserve(findArgQuantity(argv));
 	while (argv[0])
 	{
@@ -70,5 +71,10 @@ void	PmergeMe::getVectorElements(char** argv)
 
 // void	PmergeMe::executeVectorSort(int n)
 // {
+// 	std::vector<int>						pair;
+// 	static std::vector<std::vector<int>>	pairHolder;
+
+	
+
 	
 // }
