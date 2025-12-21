@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 15:56:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 16:11:32 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,22 @@
 class PmergeMe
 {
 	private:
-	// Constructors
-		PmergeMe() = delete;
-		PmergeMe(int n) = delete;
-		PmergeMe(PmergeMe const &src)  = delete;
-		PmergeMe	operator=(PmergeMe const &src) = delete;
-		~PmergeMe() = delete;
+		std::vector<int>	sortingVector;
+		std::deque<int>		sortingDeque;
+
 
 	public:
-		
-}
+		// Constructors
+		PmergeMe();
+		PmergeMe(std::string	name);
+		PmergeMe(PmergeMe const &src);
+		PmergeMe	operator=(PmergeMe const &src);
+		~PmergeMe();
+
+		executeAlgorithm(int n);
+};
+
+//PROTOTYPES
+int	error_msg(std::string error_str);
+
+#endif
