@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 16:15:09 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 16:52:00 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	error_msg(std::string error_str)
 	return (EXIT_FAILURE);
 }
 
-static int	findArgQuantity(char **argv)
+int	findArgQuantity(char **argv)
 {
 	int	i = 0;
 
@@ -51,8 +51,8 @@ static int	checkDups(char** argv)
 
 static int	checkArgs(int argc, char** argv)
 {
-	if (argc < 4)
-		return (error_msg("No less than 4 elements are allowed."));
+	if ((argc - 1) < 4)
+		return (error_msg("Inputing less than 4 numbers is not allowed."));
 
 	int	currStr = 1;
 	int	currChar = 0;
@@ -82,6 +82,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 
 	PmergeMe	containerHolder;
-	containerHolder
-	
+	containerHolder.getAndPushNumbers(argv);
+
+	return (EXIT_SUCCESS);
 }
