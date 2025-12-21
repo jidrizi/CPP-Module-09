@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/20 04:31:24 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 02:52:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,23 @@
 
 
 // LIBRARIES
-# include <vector>
-# include <deque>
-# include <string>
-# include <sstream>
-# include <iostream>
-# include <utility>
-# include <algorithm>
-# include <climits>
-# include <cstring>
-# include <ctime>
+#include <deque>
+#include <type_traits>
+#include <vector>
+#include <algorithm>
+#include <cctype>
+#include <chrono>
+#include <iostream>
+#include <ratio>
+#include <string>
+#include <algorithm>
+#include <cassert>
+#include <cmath>
+#include <cstddef>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 
 // CLASSES
@@ -44,7 +51,7 @@ class PmergeMe
 		PmergeMe() = delete;
 		~PmergeMe() = delete;
 		PmergeMe(int container) = delete;
-		pMerge(const PmergeMe &src) = delete;
+		PmergeMe(const PmergeMe &src) = delete;
 		PmergeMe	&operator=(const PmergeMe &src) = delete;
 	
 	public:
@@ -53,8 +60,8 @@ class PmergeMe
 		std::is_same<T, std::vector<unsigned long>>::value ||
 			std::is_same<T, std::deque<unsigned long>>::value,
 		void>::type
-		exuciteMerge(T container);
-}
+		executeMerge(T container);
+};
 
 // FUNCTIONS
 

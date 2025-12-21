@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/20 04:37:50 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 02:50:53 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ template <typename T> static void jacob(T &container, unsigned long n) {
 
 
 template <>
-void pMerge::merge<std::vector<unsigned long>>(std::vector<unsigned long> container) 
+void PmergeMe::executeMerge<std::vector<unsigned long>>(std::vector<unsigned long> container) 
 {
   std::cout << "Sorting a vector container of size: " << container.size()
             << std::endl;
@@ -229,7 +229,7 @@ void pMerge::merge<std::vector<unsigned long>>(std::vector<unsigned long> contai
 }
 
 template <>
-void pMerge::merge<std::deque<unsigned long>>(std::deque<unsigned long> container) 
+void PmergeMe::executeMerge<std::deque<unsigned long>>(std::deque<unsigned long> container) 
 {
   std::cout << "\n\nSorting a deque container of size: " << container.size()
             << std::endl;
