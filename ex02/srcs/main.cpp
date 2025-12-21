@@ -6,9 +6,82 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 14:47:04 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 16:15:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+int	error_msg(std::string error_str)
+{
+	std::cerr << "Error" << std::endl;
+	std::cerr << error_str << std::endl;
+
+	return (EXIT_FAILURE);
+}
+
+static int	findArgQuantity(char **argv)
+{
+	int	i = 0;
+
+	for ( ; argv[0]; argv++)
+		i++;
+	return (i);
+}
+
+static int	checkDups(char** argv)
+{
+	int current = 0;
+	int next = 1;
+
+	while (argv[current])
+	{
+		while (argv[current + next])
+		{
+			if (strcmp(argv[current], argv[current + next]) == 0)
+				return (EXIT_FAILURE);
+			next++;
+		}
+		next = 1;
+		current++;
+	}
+
+	return (EXIT_SUCCESS);
+}
+
+static int	checkArgs(int argc, char** argv)
+{
+	if (argc < 4)
+		return (error_msg("No less than 4 elements are allowed."));
+
+	int	currStr = 1;
+	int	currChar = 0;
+	while (argv[currStr])
+	{
+		while (argv[currStr][currChar])
+		{
+			if (argv[currStr][currChar] && !std::isdigit(argv[currStr][currChar]))
+				return (error_msg("Only numbers allowed."));
+			currChar++;
+		}
+		currChar = 0;
+		currStr++;
+	}
+
+	if (checkDups(argv) == EXIT_FAILURE)
+		return (error_msg("No duplicates are allowed."));
+
+	return (EXIT_SUCCESS);
+}
+
+
+
+int	main(int argc, char **argv)
+{
+	if (checkArgs(argc, argv) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+
+	PmergeMe	containerHolder;
+	containerHolder
+	
+}
