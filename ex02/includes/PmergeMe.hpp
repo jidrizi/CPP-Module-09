@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 14:47:12 by jidrizi          ###   ########.fr       */
+/*   Updated: 2025/12/21 15:56:09 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # ifndef EXIT_SUCCESS
 #  define EXIT_SUCCESS 0
 # endif
-
 
 // LIBRARIES
 #include <deque>
@@ -41,3 +40,18 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+//CLASSES
+class PmergeMe
+{
+	private:
+	// Constructors
+		PmergeMe() = delete;
+		PmergeMe(int n) = delete;
+		PmergeMe(PmergeMe const &src)  = delete;
+		PmergeMe	operator=(PmergeMe const &src) = delete;
+		~PmergeMe() = delete;
+
+	public:
+		
+}
