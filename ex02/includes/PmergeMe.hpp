@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 16:41:58 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/10 20:40:04 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ class PmergeMe
 		// constructor with a parameter...
 		std::string			name; 
 		
-		std::vector<int>	sortingVector;
-		std::deque<int>		sortingDeque;
+		std::vector<int>	toBeSortedVector;
+		std::deque<int>		toBeSortedDeque;
 
 
 	public:
@@ -62,12 +62,15 @@ class PmergeMe
 		~PmergeMe();
 
 		// Member functions
-		void	getAndPushNumbers(char **argv);
-		void	executeAlgorithm(int n);
+		void				getAndPushNumbers(char **argv);
+		void				printContainerElements(std::string msg);
+		std::vector<int>	updateGroups(std::vector<int> toBeSortedVector, 
+								std::vector< vector > endResult);
+		void				executeAlgorithm(unsigned long n);
 };
 
 //PROTOTYPES
-int	error_msg(std::string error_str);
+int	errorMsg(std::string msgStr);
 int	findArgQuantity(char **argv);
 
 #endif

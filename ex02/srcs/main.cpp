@@ -6,16 +6,16 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2025/12/21 16:52:00 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/10 20:21:29 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-int	error_msg(std::string error_str)
+int	errorMsg(std::string msgStr)
 {
 	std::cerr << "Error" << std::endl;
-	std::cerr << error_str << std::endl;
+	std::cerr << msgStr << std::endl;
 
 	return (EXIT_FAILURE);
 }
@@ -52,7 +52,7 @@ static int	checkDups(char** argv)
 static int	checkArgs(int argc, char** argv)
 {
 	if ((argc - 1) < 4)
-		return (error_msg("Inputing less than 4 numbers is not allowed."));
+		return (errorMsg("Inputing less than 4 numbers is not allowed."));
 
 	int	currStr = 1;
 	int	currChar = 0;
@@ -61,7 +61,7 @@ static int	checkArgs(int argc, char** argv)
 		while (argv[currStr][currChar])
 		{
 			if (argv[currStr][currChar] && !std::isdigit(argv[currStr][currChar]))
-				return (error_msg("Only numbers allowed."));
+				return (errorMsg("Only numbers allowed."));
 			currChar++;
 		}
 		currChar = 0;
@@ -69,7 +69,7 @@ static int	checkArgs(int argc, char** argv)
 	}
 
 	if (checkDups(argv) == EXIT_FAILURE)
-		return (error_msg("No duplicates are allowed."));
+		return (errorMsg("No duplicates are allowed."));
 
 	return (EXIT_SUCCESS);
 }
@@ -83,6 +83,10 @@ int	main(int argc, char **argv)
 
 	PmergeMe	containerHolder;
 	containerHolder.getAndPushNumbers(argv);
+
+	containerHolder.printContainerElements("Before:  ");
+	containerHolder.executeAlgorithm(1);
+	// containerHolder.printContainerElements("After:  ");
 
 	return (EXIT_SUCCESS);
 }
