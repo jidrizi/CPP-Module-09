@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/14 20:46:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/14 23:11:27 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	PmergeMe::handleFirstCall(std::vector<int> toBeSortedVector,
 						std::vector< std::vector<int> > &endResult)
 {
 	std::vector<int>	group;
-	group.reserve(n * 2);
+	group.reserve(2);
 
-	for(unsigned long i = 0; i < this->toBeSortedVector.size(); )
+	for(unsigned long i = 0; i + 1 < this->toBeSortedVector.size(); )
 	{
 		group.push_back(toBeSortedVector[i++]);
 		group.push_back(toBeSortedVector[i++]);
@@ -93,10 +93,14 @@ void	PmergeMe::handleFirstCall(std::vector<int> toBeSortedVector,
 		group.clear();
 	}
 
-	for (int	i = 0; i + 1 < endResult.size(); i++)
+	for (unsigned long	i = 0; i < endResult.size(); i++)
 	{
-		if (endResult[i].back() > endResult[i + 1].back())
-			std::swap(endResult[i], endResult[i + 1]);
+		if (endResult[i][0] > endResult[i][1])
+		{
+			int tmp = endResult[i][0];
+			endResult[i][0] = endResult[i][1];
+			endResult[i][1] = tmp;
+		}
 	}
 
 	return ;
@@ -104,14 +108,19 @@ void	PmergeMe::handleFirstCall(std::vector<int> toBeSortedVector,
 
 void	PmergeMe::executeAlgorithm(unsigned long n)
 {
-	static std::vector< std::vector<int> >	endResult;
 
+	static std::vector< std::vector<int> >	endResult;
 	if (n == 1)
 	{
 		this->handleFirstCall(toBeSortedVector, endResult);
 		this->executeAlgorithm(n * 2);
 		return ;
 	}
+	
+	
+	
+}
+	
 
 	// for (int	i = 0; i + 1 < endResult.size(); i++)
 	// {
@@ -119,4 +128,3 @@ void	PmergeMe::executeAlgorithm(unsigned long n)
 	// 		std::swap(endResult[i], endResult[i + 1]);
 	// }
 	
-}
