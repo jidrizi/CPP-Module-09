@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/10 21:33:53 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/14 20:46:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ void	PmergeMe::handleFirstCall(std::vector<int> toBeSortedVector,
 		group.clear();
 	}
 
+	for (int	i = 0; i + 1 < endResult.size(); i++)
+	{
+		if (endResult[i].back() > endResult[i + 1].back())
+			std::swap(endResult[i], endResult[i + 1]);
+	}
+
 	return ;
 }
 
@@ -107,10 +113,10 @@ void	PmergeMe::executeAlgorithm(unsigned long n)
 		return ;
 	}
 
-	for (int	i = 0; i + 1 < endResult.size(); i++)
-	{
-		if (endResult[i].back() > endResult[i + 1].back())
-			std::swap(endResult[i], endResult[i + 1]);
-	}
+	// for (int	i = 0; i + 1 < endResult.size(); i++)
+	// {
+	// 	if (endResult[i].back() > endResult[i + 1].back())
+	// 		std::swap(endResult[i], endResult[i + 1]);
+	// }
 	
 }
