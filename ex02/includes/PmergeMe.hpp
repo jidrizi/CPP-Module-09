@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/14 20:49:04 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/15 01:22:52 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ class PmergeMe
 		~PmergeMe();
 
 		// Member functions
-		void	getAndPushNumbers(char **argv);
-		void	printContainerElements(std::string msg);
-		void	handleFirstCall(std::vector<int> toBeSortedVector,
-					std::vector< std::vector<int> > &endResult);
-		void	executeAlgorithm(unsigned long n);
+		void							getAndPushNumbers(char **argv);
+		void							printContainerElements(std::string msg);
+		std::vector< std::vector<int> >	adjustContainer(std::vector < std::vector<int> > result,
+										unsigned long n)
+		void							executeAlgorithm(unsigned long n);
 };
 
 //PROTOTYPES
