@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/18 22:15:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/18 23:44:33 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,32 @@ PmergeMe::~PmergeMe()
 
 
 
+void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
+{
+	unsigned long	x = 0;
+	unsigned long	y = 0;
+	
+	if (result.empty())
+		return ;
+	std::cout << n << s;
+	while (x < result.size())
+	{
+		y = 0;
+		std::cout << "[";
+		while (y < result[x].size())
+		{
+			std::cout << result[x][y] << " ";
+			y++;
+		}
+		std::cout << "]";
+		x++;
+	}
+	std::cout << std::endl;
+}
+
+
+
+
 // Member functions
 void	PmergeMe::getAndPushNumbers(char **argv)
 {
@@ -83,15 +109,19 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 {
 	std::vector< std::vector<int> >	newResult;
 	std::vector<int>				newPair;
-	newPair.reserve(n);
+	unsigned long					currPair;
 
-	for (unsigned long currPair = 0; currPair < result.size(); currPair++)
+	newPair.reserve(n);
+	currPair = 0;
+
+	while (currPair + 1 < result.size())
 	{
-		for (int	i = 0; result[currPair][i]; i++)
+		for (unsigned long	i = 0; i < result[currPair].size(); i++)
 			newPair.push_back(result[currPair][i]);
 		currPair++;
-		for (int	i = 0; result[currPair][i]; i++)
+		for (unsigned long	i = 0; i < result[currPair].size(); i++)
 			newPair.push_back(result[currPair][i]);
+		currPair++;
 		newResult.push_back(newPair);
 		newPair.clear();
 	}
@@ -122,12 +152,13 @@ void	PmergeMe::executeAlgorithm(unsigned long n)
 	else
 		result = this->adjustContainer(result, n);
 
-	for (unsigned long i = 0; (i + 1) < result.size(); i++)
+	for (unsigned long i = 0; (i + 1) < result.size(); i += 2)
 	{
 		if (result[i + 1].back() < result[i].back())
 			std::swap(result[i], result[i + 1]);
 	}
 
+	debugResult(result, " /Sequence:  ", n);
 	this->executeAlgorithm(n * 2);
 }
 	

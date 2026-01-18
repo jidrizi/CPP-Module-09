@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/18 21:57:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/18 22:46:14 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ class PmergeMe
 //PROTOTYPES
 int	errorMsg(std::string msgStr);
 int	findArgQuantity(char **argv);
+void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 
 #endif
