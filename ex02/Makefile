@@ -1,6 +1,6 @@
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++17 -Iincludes
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++17 -Iincludes
 
 NAME = PmergeMe
 

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/15 01:22:44 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/18 22:15:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,34 @@ void	PmergeMe::printContainerElements(std::string msg)
 std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::vector<int> > result,
 										unsigned long n)
 {
-	std::vector<int>	newPair;
-	newPair.reserve(n * 2);
+	std::vector< std::vector<int> >	newResult;
+	std::vector<int>				newPair;
+	newPair.reserve(n);
 
-	for (unsigned long currPair = 0; currPair < endResult.size(); currPair++)
+	for (unsigned long currPair = 0; currPair < result.size(); currPair++)
 	{
-		
+		for (int	i = 0; result[currPair][i]; i++)
+			newPair.push_back(result[currPair][i]);
+		currPair++;
+		for (int	i = 0; result[currPair][i]; i++)
+			newPair.push_back(result[currPair][i]);
+		newResult.push_back(newPair);
+		newPair.clear();
 	}
+
+	return (newResult);
 }
 
 void	PmergeMe::executeAlgorithm(unsigned long n)
 {
-
 	static std::vector< std::vector<int> >	result;
+
+	if (n > this->toBeSortedVector.size())
+	{
+		std::cout << "END!\n";
+		return ;
+	}
+
 	if (n == 1)
 	{
 		std::vector<int>	pair;
@@ -103,13 +118,17 @@ void	PmergeMe::executeAlgorithm(unsigned long n)
 			result.push_back(pair);
 			pair.clear();
 		}
-		this->executeAlgorithm(n * 2);
-		return ;
 	}
-	
-	this->adjustContainer(result, n);
-	
-	
+	else
+		result = this->adjustContainer(result, n);
+
+	for (unsigned long i = 0; (i + 1) < result.size(); i++)
+	{
+		if (result[i + 1].back() < result[i].back())
+			std::swap(result[i], result[i + 1]);
+	}
+
+	this->executeAlgorithm(n * 2);
 }
 	
 

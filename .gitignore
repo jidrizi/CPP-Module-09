@@ -1,5 +1,6 @@
 # Non git ignore template stuff
 bin
+.vscode
 btc
 RPN
 PmergeMe

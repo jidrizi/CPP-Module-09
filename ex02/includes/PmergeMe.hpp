@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/15 01:22:52 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/18 21:57:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ class PmergeMe
 		void							getAndPushNumbers(char **argv);
 		void							printContainerElements(std::string msg);
 		std::vector< std::vector<int> >	adjustContainer(std::vector < std::vector<int> > result,
-										unsigned long n)
+										unsigned long n);
 		void							executeAlgorithm(unsigned long n);
 };
 
