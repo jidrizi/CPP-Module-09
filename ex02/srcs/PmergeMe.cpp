@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/18 23:44:33 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/19 03:53:17 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ PmergeMe::~PmergeMe()
 }
 
 
+//DEBUG THINGY
 
 void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
 {
@@ -129,16 +130,38 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	return (newResult);
 }
 
-void	PmergeMe::executeAlgorithm(unsigned long n)
+std::vector<int>	PmergeMe::adjustResult(std::vector < std::vector<int> > result)
+{
+	std::vector<int>	adjustedRes;
+	adjustedRes.reserve(result.size());
+	
+	
+	unsigned long	x = 0;
+	while (x < result.size())
+	{
+		unsigned long	y = 0;
+		while (y < result[x].size())
+		{
+			adjustedRes.push_back(result[x][y]);
+			y++;
+		}
+		x++;
+	}
+
+	return(adjustedRes);
+}
+
+
+void	PmergeMe::executeFirstHalf(unsigned long n)
 {
 	static std::vector< std::vector<int> >	result;
 
-	if (n > this->toBeSortedVector.size())
+	if (n  * 2 > this->toBeSortedVector.size())
 	{
-		std::cout << "END!\n";
+		this->toBeSortedVector = adjustResult(result);
 		return ;
 	}
-
+	
 	if (n == 1)
 	{
 		std::vector<int>	pair;
@@ -159,7 +182,7 @@ void	PmergeMe::executeAlgorithm(unsigned long n)
 	}
 
 	debugResult(result, " /Sequence:  ", n);
-	this->executeAlgorithm(n * 2);
+	this->executeFirstHalf(n * 2);
 }
 	
 

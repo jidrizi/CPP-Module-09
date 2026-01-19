@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/14 21:00:14 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/19 02:12:00 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	containerHolder.getAndPushNumbers(argv);
 
 	containerHolder.printContainerElements("Before:  ");
-	containerHolder.executeAlgorithm(1);
+	containerHolder.executeFirstHalf(1);
 	// containerHolder.printContainerElements("After:  ");
 
 	return (EXIT_SUCCESS);
