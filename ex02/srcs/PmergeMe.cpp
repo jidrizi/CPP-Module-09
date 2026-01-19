@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/19 03:53:17 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/19 23:13:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,17 +112,27 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	std::vector<int>				newPair;
 	unsigned long					currPair;
 
-	newPair.reserve(n);
+	newPair.reserve(n * 2);
 	currPair = 0;
+	
+	if (n == 1)
+	{
+		while (currPair + 1 < this->toBeSortedVector.size())
+		{
+			newPair.push_back(toBeSortedVector[currPair++]);
+			newPair.push_back(toBeSortedVector[currPair++]);
+			newResult.push_back(newPair);
+			newPair.clear();
+		}
+		return (newResult);
+	}
 
 	while (currPair + 1 < result.size())
 	{
-		for (unsigned long	i = 0; i < result[currPair].size(); i++)
+		for (unsigned long	i = 0; i < result[currPair++].size(); i++)
 			newPair.push_back(result[currPair][i]);
-		currPair++;
-		for (unsigned long	i = 0; i < result[currPair].size(); i++)
+		for (unsigned long	i = 0; i < result[currPair++].size(); i++)
 			newPair.push_back(result[currPair][i]);
-		currPair++;
 		newResult.push_back(newPair);
 		newPair.clear();
 	}
@@ -130,65 +140,22 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	return (newResult);
 }
 
-std::vector<int>	PmergeMe::adjustResult(std::vector < std::vector<int> > result)
-{
-	std::vector<int>	adjustedRes;
-	adjustedRes.reserve(result.size());
-	
-	
-	unsigned long	x = 0;
-	while (x < result.size())
-	{
-		unsigned long	y = 0;
-		while (y < result[x].size())
-		{
-			adjustedRes.push_back(result[x][y]);
-			y++;
-		}
-		x++;
-	}
-
-	return(adjustedRes);
-}
-
-
 void	PmergeMe::executeFirstHalf(unsigned long n)
 {
 	static std::vector< std::vector<int> >	result;
-
-	if (n  * 2 > this->toBeSortedVector.size())
+	if ( (n * 2) > this->toBeSortedVector.size() )
 	{
-		this->toBeSortedVector = adjustResult(result);
+		this->firstHalfSequence = result;
 		return ;
 	}
 	
-	if (n == 1)
+	result = this->adjustContainer(result, n);
+	for (unsigned long currPair = 0; currPair < result.size(); currPair++)
 	{
-		std::vector<int>	pair;
-		for (unsigned long i = 0; i < this->toBeSortedVector.size(); i++)
-		{
-			pair.push_back(toBeSortedVector[i]);
-			result.push_back(pair);
-			pair.clear();
-		}
-	}
-	else
-		result = this->adjustContainer(result, n);
-
-	for (unsigned long i = 0; (i + 1) < result.size(); i += 2)
-	{
-		if (result[i + 1].back() < result[i].back())
-			std::swap(result[i], result[i + 1]);
+		if (result[currPair][n * 2] < result[currPair][n])
+			std::swap(result[currPair][n], result[currPair][n * 2]);
 	}
 
 	debugResult(result, " /Sequence:  ", n);
 	this->executeFirstHalf(n * 2);
 }
-	
-
-	// for (int	i = 0; i + 1 < result.size(); i++)
-	// {
-	// 	if (result[i].back() > result[i + 1].back())
-	// 		std::swap(result[i], result[i + 1]);
-	// }
-	

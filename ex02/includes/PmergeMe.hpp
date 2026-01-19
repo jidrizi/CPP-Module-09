@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/19 02:10:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/19 22:23:02 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ class PmergeMe
 	private:
 		// Only created 'name' because I think we are required to make a 
 		// constructor with a parameter...
-		std::string			name; 
+		std::string						name; 
 		
-		std::vector<int>	toBeSortedVector;
-		std::deque<int>		toBeSortedDeque;
+		std::vector<int>				toBeSortedVector;
+		std::deque<int>					toBeSortedDeque;
+		std::vector< std::vector<int> >	firstHalfSequence;
 
 
 	public:
@@ -65,7 +66,7 @@ class PmergeMe
 		void							getAndPushNumbers(char **argv);
 		void							printContainerElements(std::string msg);
 		std::vector< std::vector<int> >	adjustContainer(std::vector < std::vector<int> > result,
-										unsigned long n);
+											unsigned long n);
 		std::vector<int>				adjustResult(std::vector < std::vector<int> > result);
 		void							executeFirstHalf(unsigned long n);
 };
