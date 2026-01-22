@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/21 01:10:08 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/22 08:47:36 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 
 	if (n == 2)
 	{
-		while (currPair + 1 < this->toBeSortedVector.size())
+		while (currPair < this->toBeSortedVector.size())
 		{
 			pair.push_back(toBeSortedVector[currPair++]);
 			result.push_back(pair);
@@ -127,13 +127,16 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	}
 	else
 	{
-		while (currPair + 1 < result.size())
+		while (currPair < result.size())
 		{
 			for (unsigned long	i = 0; i < result[currPair].size(); i++)
 				pair.push_back(result[currPair][i]);
 			currPair++;
-			for (unsigned long	i = 0; i < result[currPair].size(); i++)
-				pair.push_back(result[currPair][i]);
+			if (currPair < result.size())
+			{
+				for (unsigned long	i = 0; i < result[currPair].size(); i++)
+					pair.push_back(result[currPair][i]);
+			}
 			currPair++;
 			newResult.push_back(pair);
 			pair.clear();
@@ -157,11 +160,17 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 	}
 	
 	result = this->adjustContainer(result, n);
-	for (unsigned long currPair = 0; currPair + 1 < result.size(); currPair += 2)
+
+	unsigned long	tmp = 0;
+	if (n == 2)
+		tmp = 1;
+	else
+		tmp = 2;
+	for (unsigned long currPair = 0; currPair + tmp < result.size(); currPair += 2)
 	{
 		if (result[currPair].back() > result[currPair + 1].back())
 			std::swap(result[currPair], result[currPair + 1]);
-	}	
+	}
 		
 	debugResult(result, "Sequence: ", n);
 	this->executeFirstHalf(n * 2);
