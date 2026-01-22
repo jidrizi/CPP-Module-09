@@ -150,7 +150,7 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 	static std::vector< std::vector<int> >	result;
 	std::vector<int>						pair;
 
-	if ((n * 2) > this->toBeSortedVector.size())
+	if (n > this->toBeSortedVector.size())
 	{
 		this->firstHalfSequence = result;
 		return ;
@@ -161,7 +161,6 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 	{
 		if (result[currPair].back() > result[currPair + 1].back())
 			std::swap(result[currPair], result[currPair + 1]);
-			
 	}	
 		
 	debugResult(result, "Sequence: ", n);
