@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/24 13:10:40 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/24 14:59:18 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	std::vector<int>				pair;
 	unsigned long					currPair;
 
-	pair.reserve(n);
+	pair.reserve(n / 2);
 	currPair = 0;
 
 	if (n == 2)
@@ -161,7 +161,8 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 	
 	result = this->adjustContainer(result, n);
 
-	for (unsigned long currPair = 0; currPair + 1 <= result.size() && result[currPair + 1].size() == (n / 2); currPair++)
+	for (unsigned long currPair = 0; currPair + 1 <= result.size() 
+			&& result[currPair + 1].size() == (n / 2); currPair++)
 	{
 		if (currPair % 2 != 0)
 			continue ;
