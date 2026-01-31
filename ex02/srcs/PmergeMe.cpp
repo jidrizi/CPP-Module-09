@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/24 14:59:18 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/31 16:51:36 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ PmergeMe::~PmergeMe()
 
 //DEBUG THINGY
 
-void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
+void	PmergeMe::debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
 {
 	unsigned long	x = 0;
 	unsigned long	y = 0;
@@ -145,9 +145,6 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	}
 }
 
-
-
-
 void	PmergeMe::executeFirstHalf(unsigned long n)
 {
 	static std::vector< std::vector<int> >	result;
@@ -170,7 +167,61 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 			std::swap(result[currPair], result[currPair + 1]);
 	}
 		
-	debugResult(result, "Sequence: ", n);
+	// debugResult(result, "Sequence: ", n);
 	this->executeFirstHalf(n * 2);
 	return ;
+}
+
+
+std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
+									unsigned long &n)
+{
+	unsigned long		currPair = 0;
+	const unsigned long	pairSize = n / 2;
+	
+	while (currPair < sequence.size())
+	{
+		if (sequence[currPair].size() != pairSize)
+			break ;
+		currPair++;
+	}
+	if (currPair > 2)
+		return (sequence);
+	
+	std::vector< std::vector<int> >	newSequence;
+	std::vector<int> 				newPairVector;
+	unsigned long					i;
+	
+	newPairVector.reserve(pairSize / 2);
+	currPair = 0;
+	while (currPair < sequence.size())
+	{
+		i = 0;
+		while (i < sequence[currPair].size() && i < pairSize / 2)
+			newPairVector.push_back(sequence[currPair][i++]);
+		newSequence.push_back(newPairVector);
+		newPairVector.clear();
+
+		while (i < sequence[currPair].size() && i < pairSize)
+			newPairVector.push_back(sequence[currPair][i++]);
+		newSequence.push_back(newPairVector);
+		newPairVector.clear();
+
+		currPair++;
+	}
+	n /= 2;
+
+	return (newSequence);
+}
+
+
+void	PmergeMe::executeSecondHalf(void)
+{
+	unsigned long	n = this->firstHalfSequence[0].size() * 2;
+
+	this->firstHalfSequence = adjustSequence(this->firstHalfSequence, n);
+	debugResult(this->firstHalfSequence, ":\t", n);
+
+	std::vector< std::vector<int> >	mainChain;
+	std::vector< std::vector<int> >	pendingChain;
 }

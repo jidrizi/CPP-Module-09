@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/21 01:11:56 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/31 16:24:07 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,13 @@ class PmergeMe
 		void							getAndPushNumbers(char **argv);
 		void							printContainerElements(std::string msg);
 		std::vector< std::vector<int> > adjustContainer(std::vector < std::vector<int> > result,
-										unsigned long n);
+											unsigned long n);
 		std::vector<int>				adjustResult(std::vector < std::vector<int> > result);
+		std::vector< std::vector<int> >	adjustSequence(std::vector< std::vector<int> > sequence,
+											unsigned long &n);
 		void							executeFirstHalf(unsigned long n);
+		void							executeSecondHalf(void);
+		void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 };
 
 //PROTOTYPES
@@ -76,6 +80,5 @@ int	errorMsg(std::string msgStr);
 int	findArgQuantity(char **argv);
 
 
-void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 
 #endif
