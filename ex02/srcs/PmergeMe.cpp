@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/31 19:59:25 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/31 20:07:26 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vecto
 }
 
 
-void	PmergeMe::executeSecondHalf(void)
+void	PmergeMe::executeSecondHalf(unsigned long jacobNbr)
 {
 	unsigned long	n = this->firstHalfSequence[0].size() * 2;
 

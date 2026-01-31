@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/31 16:24:07 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/31 20:07:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ class PmergeMe
 		std::vector< std::vector<int> >	adjustSequence(std::vector< std::vector<int> > sequence,
 											unsigned long &n);
 		void							executeFirstHalf(unsigned long n);
-		void							executeSecondHalf(void);
+		void							executeSecondHalf(unsigned long jacobNbr);
 		void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 };
 
