@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/31 16:51:36 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/01/31 19:59:25 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,4 +224,13 @@ void	PmergeMe::executeSecondHalf(void)
 
 	std::vector< std::vector<int> >	mainChain;
 	std::vector< std::vector<int> >	pendingChain;
+
+	mainChain.push_back(this->firstHalfSequence[0]);
+	for (unsigned long currPair = 1; currPair < this->firstHalfSequence; currPair++)
+	{
+		if (currPair % 2 == 0)
+			pendingChain.push_back(this->firstHalfSequence[currPair]);
+		else if (currPair % 2 != 0)
+			mainChain.push_back(this->firstHalfSequence[currPair]);
+	}
 }
