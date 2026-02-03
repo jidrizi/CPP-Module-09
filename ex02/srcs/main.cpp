@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	containerHolder.printContainerElements("Before:  ");
 	containerHolder.executeFirstHalf(2);
 	containerHolder.executeSecondHalf(1);
-	// containerHolder.printContainerElements("After:  ");
+	containerHolder.printContainerElements("After:  ");
 
 	return (EXIT_SUCCESS);
 }

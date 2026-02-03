@@ -70,6 +70,10 @@ class PmergeMe
 		std::vector<int>				adjustResult(std::vector < std::vector<int> > result);
 		std::vector< std::vector<int> >	adjustSequence(std::vector< std::vector<int> > sequence,
 											unsigned long &n);
+		void							firstCall(std::vector< std::vector<int> >	&pendingChain,
+											std::vector< std::vector<int> >	&mainChain,
+											unsigned long &n);
+		unsigned long					jacobsthal(unsigned long call);
 		void							executeFirstHalf(unsigned long n);
 		void							executeSecondHalf(unsigned long jacobNbr);
 		void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
