@@ -204,51 +204,49 @@ std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vecto
 	return (newSequence);
 }
 
-void	PmergeMe::jacobsthalStuff( std::vector< std::vector<int> > &pendingChain,
-					std::vector< std::vector<int> >	&mainChain, 
-					unsigned long jacobNbr)
-{
-	if (jacobNbr == 3)
-}
-
-
 
 void	PmergeMe::executeSecondHalf(unsigned long jacobNbr)
 {
 	static std::vector< std::vector<int> >	pendingChain;
 	static std::vector< std::vector<int> >	mainChain;
-	unsigned long							n = this->firstHalfSequence[0].size() * 2;
 
-	debugResult(this->firstHalfSequence, ":\t", n);
-	
-	if (jacobNbr == 1)
+	unsigned long	n = this->firstHalfSequence[0].size() * 2;
+	if (n <= 2)
+		return ;
+
+	debugResult(this->firstHalfSequence, ":\t", n);	
+	if (jacobNbr == 3)
 	{
 		unsigned long	currPair = 0;
-		while (currPair < sequence.size())
+		while (currPair < this->firstHalfSequence.size())
 		{
-			if (sequence[currPair].size() != n / 2)
+			if (this->firstHalfSequence[currPair].size() != n / 2)
 				break ;
 			currPair++;
 		}
 		if (currPair <= 2)
 			this->firstHalfSequence = adjustSequence(this->firstHalfSequence, n);
-		else
-			break ;
-
 
 		mainChain.push_back(this->firstHalfSequence[0]);
-		for (unsigned long currPair = 1; currPair < this->firstHalfSequence; 
-				currPair++)
+		for (unsigned long currPair = 1; currPair < this->firstHalfSequence.size()) currPair++)
 		{
 			if (currPair % 2 == 0)
 				pendingChain.push_back(this->firstHalfSequence[currPair]);
 			else if (currPair % 2 != 0)
 				mainChain.push_back(this->firstHalfSequence[currPair]);
 		}
+		executeSecondHalf(2);
 	}
-	else
+
+	unsigned long	i = 0;
+	while (pendingChain[jacobNbr - 2].back() > mainChain[i].back())
+		i++;
+	mainChain.insert(mainChain.begin() + i, pendingChain[jacobNbr - 2]);
 		
-	
-	// makeNextJacobNbr(jacobNbr);
-	return ;
+	if (jacobNbr == 2)
+		jacobNbr = 5;
+	// else
+		// jacobNbr formula
+	adjustSequence(this->firstHalfSequence, n);
+	executeSecondHalf(jacobNbr);
 }
