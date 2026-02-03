@@ -256,7 +256,7 @@ void	PmergeMe::executeSecondHalf(unsigned long call)
 	mainChain.insert(mainChain.begin() + i, pendingChain[jacobNbr - 2]);
 	
 	if (call != 1)
-		adjustSequence(this->firstHalfSequence, n);\
+		adjustSequence(this->firstHalfSequence, n);
 
 	debugResult(this->firstHalfSequence, ":\t", n);	
 	executeSecondHalf(call + 1);
