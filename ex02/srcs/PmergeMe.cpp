@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:57:38 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/03 17:13:20 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,9 @@ std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vecto
 
 void	PmergeMe::jacobsthalStuff( std::vector< std::vector<int> > &pendingChain,
 					std::vector< std::vector<int> >	&mainChain, 
-					unsigned long &jacobNbr)
+					unsigned long jacobNbr)
 {
-	
+	if (jacobNbr == 3)
 }
 
 
@@ -249,5 +249,6 @@ void	PmergeMe::executeSecondHalf(unsigned long jacobNbr)
 	else
 		
 	
-	
+	// makeNextJacobNbr(jacobNbr);
+	return ;
 }
