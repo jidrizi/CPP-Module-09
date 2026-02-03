@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/31 20:07:26 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/03 16:57:38 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,21 +176,11 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 									unsigned long &n)
 {
-	unsigned long		currPair = 0;
-	const unsigned long	pairSize = n / 2;
-	
-	while (currPair < sequence.size())
-	{
-		if (sequence[currPair].size() != pairSize)
-			break ;
-		currPair++;
-	}
-	if (currPair > 2)
-		return (sequence);
-	
 	std::vector< std::vector<int> >	newSequence;
 	std::vector<int> 				newPairVector;
 	unsigned long					i;
+	unsigned long					currPair;
+	const unsigned long				pairSize = n / 2;
 	
 	newPairVector.reserve(pairSize / 2);
 	currPair = 0;
@@ -209,28 +199,55 @@ std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vecto
 
 		currPair++;
 	}
+	
 	n /= 2;
-
 	return (newSequence);
 }
+
+void	PmergeMe::jacobsthalStuff( std::vector< std::vector<int> > &pendingChain,
+					std::vector< std::vector<int> >	&mainChain, 
+					unsigned long &jacobNbr)
+{
+	
+}
+
 
 
 void	PmergeMe::executeSecondHalf(unsigned long jacobNbr)
 {
-	unsigned long	n = this->firstHalfSequence[0].size() * 2;
+	static std::vector< std::vector<int> >	pendingChain;
+	static std::vector< std::vector<int> >	mainChain;
+	unsigned long							n = this->firstHalfSequence[0].size() * 2;
 
-	this->firstHalfSequence = adjustSequence(this->firstHalfSequence, n);
 	debugResult(this->firstHalfSequence, ":\t", n);
-
-	std::vector< std::vector<int> >	mainChain;
-	std::vector< std::vector<int> >	pendingChain;
-
-	mainChain.push_back(this->firstHalfSequence[0]);
-	for (unsigned long currPair = 1; currPair < this->firstHalfSequence; currPair++)
+	
+	if (jacobNbr == 1)
 	{
-		if (currPair % 2 == 0)
-			pendingChain.push_back(this->firstHalfSequence[currPair]);
-		else if (currPair % 2 != 0)
-			mainChain.push_back(this->firstHalfSequence[currPair]);
+		unsigned long	currPair = 0;
+		while (currPair < sequence.size())
+		{
+			if (sequence[currPair].size() != n / 2)
+				break ;
+			currPair++;
+		}
+		if (currPair <= 2)
+			this->firstHalfSequence = adjustSequence(this->firstHalfSequence, n);
+		else
+			break ;
+
+
+		mainChain.push_back(this->firstHalfSequence[0]);
+		for (unsigned long currPair = 1; currPair < this->firstHalfSequence; 
+				currPair++)
+		{
+			if (currPair % 2 == 0)
+				pendingChain.push_back(this->firstHalfSequence[currPair]);
+			else if (currPair % 2 != 0)
+				mainChain.push_back(this->firstHalfSequence[currPair]);
+		}
 	}
+	else
+		
+	
+	
 }
