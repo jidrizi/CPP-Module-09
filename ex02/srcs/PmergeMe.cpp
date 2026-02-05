@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/05 04:25:25 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/05 04:28:45 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void	PmergeMe::executeSecondHalf(unsigned long call)
 	for (unsigned long currPair = 1;
 			currPair < this->firstHalfSequence.size(); currPair++)
 	{
-		if (currPair % 2 == 0 || this->firstHalfSequence[currPair].size() != n / 2)
+		if (currPair % 2 == 0)
 			pendingChain.push_back(this->firstHalfSequence[currPair]);
 		else if (currPair % 2 != 0)
 			mainChain.push_back(this->firstHalfSequence[currPair]);
@@ -279,8 +279,8 @@ void	PmergeMe::executeSecondHalf(unsigned long call)
 	// 	pendingChain.erase(pendingChain.begin() + 1);
 	// }
 
-	// if (this->firstHalfSequence.size() % 2 != 0)
-	// 	mainChain.push_back(this->firstHalfSequence.back());
+	if (this->firstHalfSequence.size() % 2 != 0)
+		mainChain.push_back(this->firstHalfSequence.back());
 	this->firstHalfSequence = mainChain;
 	debugResult(this->firstHalfSequence, "|\t", n);
 	executeSecondHalf(call + 1);
