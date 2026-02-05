@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/01/31 20:07:48 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/05 03:50:59 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,15 @@ class PmergeMe
 		// Member functions
 		void							getAndPushNumbers(char **argv);
 		void							printContainerElements(std::string msg);
+
 		std::vector< std::vector<int> > adjustContainer(std::vector < std::vector<int> > result,
 											unsigned long n);
 		std::vector<int>				adjustResult(std::vector < std::vector<int> > result);
-		std::vector< std::vector<int> >	adjustSequence(std::vector< std::vector<int> > sequence,
-											unsigned long &n);
-		void							firstCall(std::vector< std::vector<int> >	&pendingChain,
-											std::vector< std::vector<int> >	&mainChain,
-											unsigned long &n);
-		unsigned long					jacobsthal(unsigned long call);
 		void							executeFirstHalf(unsigned long n);
+
+		std::vector< std::vector<int> >	adjustSequence(std::vector< std::vector<int> > sequence,
+											unsigned long &n, unsigned long call)
+		unsigned long					jacobsthal(unsigned long pSize);
 		void							executeSecondHalf(unsigned long jacobNbr);
 		void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 };

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/03 17:13:20 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/05 03:48:39 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,13 +174,26 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 
 
 std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
-									unsigned long &n)
+									unsigned long &n, unsigned long call)
 {
 	std::vector< std::vector<int> >	newSequence;
 	std::vector<int> 				newPairVector;
 	unsigned long					i;
 	unsigned long					currPair;
 	const unsigned long				pairSize = n / 2;
+
+	if (call == 1)
+	{
+		unsigned long	currPair = 0;
+		while (currPair < this->firstHalfSequence.size()currPair)
+		{
+			if (this->firstHalfSequence[currPair].size() != n / 2)
+				break ;
+			currPair++;
+		}
+		if (currPair > 2)
+			return ;
+	}
 	
 	newPairVector.reserve(pairSize / 2);
 	currPair = 0;
@@ -204,74 +217,45 @@ std::vector< std::vector<int> >	PmergeMe::adjustSequence(std::vector< std::vecto
 	return (newSequence);
 }
 
-void	PmergeMe::firstCall(std::vector< std::vector<int> >	&pendingChain,
-					std::vector< std::vector<int> >	&mainChain,
-					unsigned long &n)
+
+void	PmergeMe::executeSecondHalf(unsigned long call)
 {
-	unsigned long	currPair = 0;
-	while (currPair < this->firstHalfSequence.size())
-	{
-		if (this->firstHalfSequence[currPair].size() != n / 2)
-			break ;
-		currPair++;
-	}
-	if (currPair <= 2)
-		this->firstHalfSequence = adjustSequence(this->firstHalfSequence, n);
+	unsigned long	n = this->firstHalfSequence[0].size() * 2;
+	unsigned long pairSize = n / 2;
+	if (n <= 2)
+		return ;
 
+	adjustSequence(this->firstHalfSequence, n, call);
 
+	std::vector< std::vector<int> >	pendingChain;
+	std::vector< std::vector<int> >	mainChain;
 	mainChain.push_back(this->firstHalfSequence[0]);
-	for (unsigned long currPair = 1; currPair < this->firstHalfSequence.size(); currPair++)
+	for (unsigned long currPair = 1;
+			currPair < this->firstHalfSequence.size(); currPair++)
 	{
-		if (currPair % 2 == 0)
+		if (currPair % 2 == 0 || this->firstHalfSequence[currPair] != pairSize)
 			pendingChain.push_back(this->firstHalfSequence[currPair]);
 		else if (currPair % 2 != 0)
 			mainChain.push_back(this->firstHalfSequence[currPair]);
 	}
-}
 
-unsigned long	PmergeMe::jacobsthal(unsigned long index)
-{
-    if (index == 0) 
-		return (0);
-    else if (index == 1) 
-		return (1);
-    return (jacobsthal(index - 1) + 2 * jacobsthal(index - 2));
-}
-
-void	PmergeMe::executeSecondHalf(unsigned long call)
-{
-	static std::vector< std::vector<int> >	pendingChain;
-	static std::vector< std::vector<int> >	mainChain;
-
-	unsigned long	n = this->firstHalfSequence[0].size() * 2;
-	if (n <= 2)
+	for (unsigned long jacobNbr = jacobsthal(pendingChain.size()); jacobNbr != 0)
 	{
-		this->firstHalfSequence = mainChain;
-		return ;
+		unsigned long	i = 0;
+		while (pendingChain[jacobNbr - 2].size() == pairSize &&
+			pendingChain[jacobNbr - 2].back() > mainChain[i].back())
+			i++;
+		if (pendingChain[jacobNbr - 2].size() == pairSize)
+		{
+			mainChain.insert(mainChain.begin() + i, pendingChain[jacobNbr - 2]);
+			pendingChain.erase(pendingChain.begin() + (jacobNbr - 2));
+		}
 	}
 
-	unsigned long	jacobNbr;
-	if (call == 1)
-		jacobNbr = 3;
-	else if (call == 2)
-		jacobNbr = 2;
-	else
-		jacobsthal(call + 1);
-
-	if (call == 1)
-		firstCall(mainChain, pendingChain, n);
-
-	unsigned long	i = 0;
-	while (pendingChain[jacobNbr - 2].size() == n / 2 &&
-		pendingChain[jacobNbr - 2].back() > mainChain[i].back())
-		i++;
-	if (pendingChain[jacobNbr - 2].size() == n / 2)
-		mainChain.insert(mainChain.begin() + i, pendingChain[jacobNbr - 2]);
-	
-	if (call != 1)
-		adjustSequence(this->firstHalfSequence, n);
-
-	debugResult(this->firstHalfSequence, ":\t", n);	
+	if (this->firstHalfSequence.size() % 2 != 0)
+		mainChain.push_back(this->firstHalfSequence.back());
+	this->firstHalfSequence = mainChain;
 	executeSecondHalf(call + 1);
+
 	return ; 
 }
