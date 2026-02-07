@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 04:57:10 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 05:16:27 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,22 +188,26 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 						+ std::pow(-1, n)) / 3);
 	while (jacobNbr <= b.back())
 	{
-		while (jacobNbr > 1)
+		unsigned long	i = 0;
+		while (b[i] < jacobNbr)
+			i++;
+		while (i >= 0)
 		{
-			unsigned long	i = 0;
-			while (jacobNbr - 2 < p.size() && i < m.size()
-					&& p[jacobNbr - 2].back() > m[i].back())
-				i++;
-			m.insert(m.begin() + i, p[jacobNbr - 2]);
-			p.erase(p.begin() + jacobNbr - 2);
-		
-			jacobNbr--;
+			unsigned long x = 0;
+			while (x < m.size()
+				&& p[i].back() > m[x].back())
+				x++;
+			m.insert(m.begin() + x, p[i]);
+			p.erase(p.begin() + i);
+			b.erase(b.begin() + i);
+			i--;
 		}
-
+		
 		n++;
 		jacobNbr =  std::round((std::pow(2, n + 1) 
-						+ std::pow(-1, n)) / 3);
+		+ std::pow(-1, n)) / 3);
 	}
+	
 	
 	if (p.empty() == false)
 	{
@@ -211,14 +215,17 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 		{
 			unsigned long	i = 0;
 			while (i < m.size() && p[rev].back() > m[i].back())
-				i++;
-			m.insert(m.begin() + i, p[rev]);
-			p.erase(p.begin() + rev);
-		}
+			i++;
+		m.insert(m.begin() + i, p[rev]);
+		p.erase(p.begin() + rev);
 	}
-	
-	return ;
 }
+
+return ;
+}
+
+
+
 
 void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 									unsigned long &n, unsigned long call)
