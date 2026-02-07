@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 07:05:21 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 07:22:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,31 @@ int	main(int argc, char **argv)
 
 	PmergeMe	containerHolder;
 	containerHolder.getAndPushNumbers(argv);
-	
+
 	containerHolder.printContainerElements("[Vector]Before:  ", 1);
+	auto startVector = std::chrono::high_resolution_clock::now();
 	containerHolder.executeFirstHalfV(2);
 	containerHolder.executeSecondHalfV(1);
+	auto endVector = std::chrono::high_resolution_clock::now();
 	containerHolder.printContainerElements("[Vector]After:  ", 1);
+	auto vectorTime =
+      std::chrono::duration<double, std::micro>(endVector - startVector);
+  std::cout  << "The time that it took the vector container is: "
+            << vectorTime.count() << " microseconds." << std::endl;
 
 	std::cout << std::endl << std::endl;
 
 
 	containerHolder.printContainerElements("[Deque]Before:  ", 2);
+	auto start = std::chrono::high_resolution_clock::now();
 	containerHolder.executeFirstHalfD(2);
 	containerHolder.executeSecondHalfD(1);
+	auto end = std::chrono::high_resolution_clock::now();
 	containerHolder.printContainerElements("[Deque]After:  ", 2);
+	auto time = std::chrono::duration<double, std::micro>(end - start);
+ 	 std::cout << "The time that it took the deque container is: " << time.count()
+            << " microseconds." << std::endl;
+
 
 	return (EXIT_SUCCESS);
 }
