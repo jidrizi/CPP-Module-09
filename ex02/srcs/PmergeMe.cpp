@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 05:27:47 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 05:35:33 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,28 @@ PmergeMe::~PmergeMe()
 
 //DEBUG THINGY
 
-void	PmergeMe::debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
-{
-	unsigned long	x = 0;
-	unsigned long	y = 0;
+// void	PmergeMe::debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n)
+// {
+// 	unsigned long	x = 0;
+// 	unsigned long	y = 0;
 	
-	if (result.empty())
-		return ;
-	std::cout << n << s;
-	while (x < result.size())
-	{
-		y = 0;
-		std::cout << "[";
-		while (y < result[x].size())
-		{
-			std::cout << result[x][y] << " ";
-			y++;
-		}
-		std::cout << "]";
-		x++;
-	}
-	std::cout << std::endl;
-}
+// 	if (result.empty())
+// 		return ;
+// 	std::cout << n << s;
+// 	while (x < result.size())
+// 	{
+// 		y = 0;
+// 		std::cout << "[";
+// 		while (y < result[x].size())
+// 		{
+// 			std::cout << result[x][y] << " ";
+// 			y++;
+// 		}
+// 		std::cout << "]";
+// 		x++;
+// 	}
+// 	std::cout << std::endl;
+// }
 
 
 
@@ -230,9 +230,6 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 	return ;
 }
 
-
-
-
 void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 									unsigned long &n, unsigned long call)
 {
@@ -278,16 +275,21 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 	this->firstHalfSequence = newSequence;
 }
 
-
 void	PmergeMe::executeSecondHalf(unsigned long call)
 {
 	unsigned long	n = this->firstHalfSequence[0].size() * 2;
 	if (n / 2 < 2)
-	return ;
+	{
+		this->toBeSortedVector.clear();
+
+		for (unsigned long i = 0; i < this->firstHalfSequence.size(); i++)
+			this->toBeSortedVector.push_back(this->firstHalfSequence[i][0]);	
+		return ;
+	}
 	
 	adjustSequence(this->firstHalfSequence, n, call);
 	
-	debugResult(this->firstHalfSequence, "[start]\t", n);
+	// debugResult(this->firstHalfSequence, "[start]\t", n);
 	std::vector< std::vector<int> >	pendingChain;
 	std::vector< std::vector<int> >	mainChain;
 	mainChain.push_back(this->firstHalfSequence[0]);
@@ -305,8 +307,10 @@ void	PmergeMe::executeSecondHalf(unsigned long call)
 	if (call == 1 && this->firstHalfSequence.back().size() != n / 2)
 		mainChain.push_back(this->firstHalfSequence.back());
 	this->firstHalfSequence = mainChain;
-	debugResult(this->firstHalfSequence, "{end}||\t", n);
+	// debugResult(this->firstHalfSequence, "{end}||\t", n);
 	std::cout << std::endl;
 	executeSecondHalf(call + 1);
 	return ; 
 }
+
+

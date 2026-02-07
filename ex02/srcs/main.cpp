@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/05 04:20:26 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 05:29:57 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	containerHolder.printContainerElements("Before:  ");
 	containerHolder.executeFirstHalf(2);
 	containerHolder.executeSecondHalf(1);
-	// containerHolder.printContainerElements("After:  ");
+	containerHolder.printContainerElements("After:  ");
 
 	return (EXIT_SUCCESS);
 }
