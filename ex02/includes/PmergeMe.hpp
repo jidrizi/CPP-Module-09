@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 05:34:57 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 07:02:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ class PmergeMe
 		
 		std::vector<int>				toBeSortedVector;
 		std::deque<int>					toBeSortedDeque;
-		std::vector< std::vector<int> >	firstHalfSequence;
+		std::vector< std::vector<int> >	firstHalfSequenceV;
+		std::deque< std::deque<int> >	firstHalfSequenceD;
 
 
 	public:
@@ -64,18 +65,32 @@ class PmergeMe
 
 		// Member functions
 		void							getAndPushNumbers(char **argv);
-		void							printContainerElements(std::string msg);
+		void							printContainerElements(std::string msg, int container);
 
-		std::vector< std::vector<int> > adjustContainer(std::vector < std::vector<int> > result,
+		std::vector< std::vector<int> > adjustContainerV(std::vector < std::vector<int> > result,
 											unsigned long n);
-		std::vector<int>				adjustResult(std::vector < std::vector<int> > result);
-		void							executeFirstHalf(unsigned long n);
+		std::vector<int>				adjustResultV(std::vector < std::vector<int> > result);
+		void							executeFirstHalfV(unsigned long n);
 
-		void							adjustSequence(std::vector< std::vector<int> > sequence,
+		void							adjustSequenceV(std::vector< std::vector<int> > sequence,
 											unsigned long &n, unsigned long call);
-		void							jacobsthalPush(std::vector< std::vector<int> > &m,
+		void							jacobsthalPushV(std::vector< std::vector<int> > &m,
 											std::vector< std::vector<int> > &p);
-		void							executeSecondHalf(unsigned long jacobNbr);
+		void							executeSecondHalfV(unsigned long jacobNbr);
+
+		
+
+		std::deque< std::deque<int> > adjustContainerD(std::deque < std::deque<int> > result,
+											unsigned long n);
+		std::deque<int>				adjustResultD(std::deque < std::deque<int> > result);
+		void							executeFirstHalfD(unsigned long n);
+
+		void							adjustSequenceD(std::deque< std::deque<int> > sequence,
+											unsigned long &n, unsigned long call);
+		void							jacobsthalPushD(std::deque< std::deque<int> > &m,
+											std::deque< std::deque<int> > &p);
+		void							executeSecondHalfD(unsigned long jacobNbr);
+
 		// void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 };
 

@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:08 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 05:29:57 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 07:05:21 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,18 @@ int	main(int argc, char **argv)
 	PmergeMe	containerHolder;
 	containerHolder.getAndPushNumbers(argv);
 	
-	containerHolder.printContainerElements("Before:  ");
-	containerHolder.executeFirstHalf(2);
-	containerHolder.executeSecondHalf(1);
-	containerHolder.printContainerElements("After:  ");
+	containerHolder.printContainerElements("[Vector]Before:  ", 1);
+	containerHolder.executeFirstHalfV(2);
+	containerHolder.executeSecondHalfV(1);
+	containerHolder.printContainerElements("[Vector]After:  ", 1);
+
+	std::cout << std::endl << std::endl;
+
+
+	containerHolder.printContainerElements("[Deque]Before:  ", 2);
+	containerHolder.executeFirstHalfD(2);
+	containerHolder.executeSecondHalfD(1);
+	containerHolder.printContainerElements("[Deque]After:  ", 2);
 
 	return (EXIT_SUCCESS);
 }

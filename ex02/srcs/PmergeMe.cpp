@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 05:35:33 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 07:09:48 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,23 @@ void	PmergeMe::getAndPushNumbers(char **argv)
 	}
 }
 
-void	PmergeMe::printContainerElements(std::string msg)
+void	PmergeMe::printContainerElements(std::string msg, int container)
 {
 	std::cout << msg;
-	for (unsigned long  i = 0; i < this->toBeSortedVector.size(); i++)
-		std::cout << toBeSortedVector[i] << " ";
+	if (container == 1)
+	{
+		for (unsigned long  i = 0; i < this->toBeSortedVector.size(); i++)
+			std::cout << toBeSortedVector[i] << " ";
+	}
+	else
+	{
+		for (unsigned long  i = 0; i < this->toBeSortedDeque.size(); i++)
+			std::cout << toBeSortedDeque[i] << " ";
+	}
 	std::cout << std::endl;
 }
 
-std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::vector<int> > result,
+std::vector< std::vector<int> > 	PmergeMe::adjustContainerV(std::vector < std::vector<int> > result,
 										unsigned long n)
 {
 	std::vector< std::vector<int> >	newResult;
@@ -145,18 +153,18 @@ std::vector< std::vector<int> > 	PmergeMe::adjustContainer(std::vector < std::ve
 	}
 }
 
-void	PmergeMe::executeFirstHalf(unsigned long n)
+void	PmergeMe::executeFirstHalfV(unsigned long n)
 {
 	static std::vector< std::vector<int> >	result;
 	std::vector<int>						pair;
 
 	if (n > this->toBeSortedVector.size())
 	{
-		this->firstHalfSequence = result;
+		this->firstHalfSequenceV = result;
 		return ;
 	}
 	
-	result = this->adjustContainer(result, n);
+	result = this->adjustContainerV(result, n);
 
 	for (unsigned long currPair = 0; currPair + 1 <= result.size() 
 			&& result[currPair + 1].size() == (n / 2); currPair++)
@@ -168,13 +176,13 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 	}
 		
 	// debugResult(result, "Sequence: ", n);
-	this->executeFirstHalf(n * 2);
+	this->executeFirstHalfV(n * 2);
 	return ;
 }
 
 
 
-void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
+void	PmergeMe::jacobsthalPushV(std::vector< std::vector<int> > &m,
 						std::vector< std::vector<int> > &p)
 {
 	std::vector<unsigned long>	b;
@@ -230,7 +238,7 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 	return ;
 }
 
-void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
+void	PmergeMe::adjustSequenceV(std::vector< std::vector<int> > sequence,
 									unsigned long &n, unsigned long call)
 {
 	std::vector< std::vector<int> >	newSequence;
@@ -242,9 +250,9 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 	if (call == 1)
 	{
 		unsigned long	currPair = 0;
-		while (currPair < this->firstHalfSequence.size())
+		while (currPair < this->firstHalfSequenceV.size())
 		{
-			if (this->firstHalfSequence[currPair].size() != n / 2)
+			if (this->firstHalfSequenceV[currPair].size() != n / 2)
 				break ;
 			currPair++;
 		}
@@ -272,45 +280,253 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 	}
 	
 	n = n / 2;
-	this->firstHalfSequence = newSequence;
+	this->firstHalfSequenceV = newSequence;
 }
 
-void	PmergeMe::executeSecondHalf(unsigned long call)
+void	PmergeMe::executeSecondHalfV(unsigned long call)
 {
-	unsigned long	n = this->firstHalfSequence[0].size() * 2;
+	unsigned long	n = this->firstHalfSequenceV[0].size() * 2;
 	if (n / 2 < 2)
 	{
 		this->toBeSortedVector.clear();
 
-		for (unsigned long i = 0; i < this->firstHalfSequence.size(); i++)
-			this->toBeSortedVector.push_back(this->firstHalfSequence[i][0]);	
+		for (unsigned long i = 0; i < this->firstHalfSequenceV.size(); i++)
+			this->toBeSortedVector.push_back(this->firstHalfSequenceV[i][0]);	
 		return ;
 	}
 	
-	adjustSequence(this->firstHalfSequence, n, call);
+	adjustSequenceV(this->firstHalfSequenceV, n, call);
 	
-	// debugResult(this->firstHalfSequence, "[start]\t", n);
+	// debugResult(this->firstHalfSequenceV, "[start]\t", n);
 	std::vector< std::vector<int> >	pendingChain;
 	std::vector< std::vector<int> >	mainChain;
-	mainChain.push_back(this->firstHalfSequence[0]);
+	mainChain.push_back(this->firstHalfSequenceV[0]);
 	for (unsigned long currPair = 1;
-			currPair < this->firstHalfSequence.size(); currPair++)
+			currPair < this->firstHalfSequenceV.size(); currPair++)
 	{
-		if (currPair % 2 == 0 && this->firstHalfSequence[currPair].size() == n / 2)
-			pendingChain.push_back(this->firstHalfSequence[currPair]);
-		else if (currPair % 2 != 0 && this->firstHalfSequence[currPair].size() == n / 2)
-			mainChain.push_back(this->firstHalfSequence[currPair]);
+		if (currPair % 2 == 0 && this->firstHalfSequenceV[currPair].size() == n / 2)
+			pendingChain.push_back(this->firstHalfSequenceV[currPair]);
+		else if (currPair % 2 != 0 && this->firstHalfSequenceV[currPair].size() == n / 2)
+			mainChain.push_back(this->firstHalfSequenceV[currPair]);
 	}
 
-	jacobsthalPush(mainChain, pendingChain);
+	jacobsthalPushV(mainChain, pendingChain);
 
-	if (call == 1 && this->firstHalfSequence.back().size() != n / 2)
-		mainChain.push_back(this->firstHalfSequence.back());
-	this->firstHalfSequence = mainChain;
-	// debugResult(this->firstHalfSequence, "{end}||\t", n);
-	std::cout << std::endl;
-	executeSecondHalf(call + 1);
+	if (call == 1 && this->firstHalfSequenceV.back().size() != n / 2)
+		mainChain.push_back(this->firstHalfSequenceV.back());
+	this->firstHalfSequenceV = mainChain;
+	// debugResult(this->firstHalfSequenceV, "{end}||\t", n);
+	// std::cout << std::endl;
+	executeSecondHalfV(call + 1);
 	return ; 
 }
 
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+
+
+std::deque< std::deque<int> > 	PmergeMe::adjustContainerD(std::deque < std::deque<int> > result,
+										unsigned long n)
+{
+	std::deque< std::deque<int> >	newResult;
+	std::deque<int>					pair;
+	unsigned long					currPair;
+
+	currPair = 0;
+
+	if (n == 2)
+	{
+		while (currPair < this->toBeSortedDeque.size())
+		{
+			pair.push_back(toBeSortedDeque[currPair++]);
+			result.push_back(pair);
+			pair.clear();
+		}
+		return (result);
+	}
+	else
+	{
+		while (currPair < result.size())
+		{
+			for (unsigned long	i = 0; i < result[currPair].size(); i++)
+				pair.push_back(result[currPair][i]);
+			currPair++;
+			if (currPair < result.size())
+			{
+				for (unsigned long	i = 0; i < result[currPair].size(); i++)
+					pair.push_back(result[currPair][i]);
+			}
+			currPair++;
+			newResult.push_back(pair);
+			pair.clear();
+		}
+		return (newResult);
+	}
+}
+
+
+void	PmergeMe::executeFirstHalfD(unsigned long n)
+{
+	static std::deque< std::deque<int> >	result;
+	std::deque<int>						pair;
+
+	if (n > this->toBeSortedVector.size())
+	{
+		this->firstHalfSequenceD = result;
+		return ;
+	}
+	
+	result = this->adjustContainerD(result, n);
+
+	for (unsigned long currPair = 0; currPair + 1 <= result.size() 
+			&& result[currPair + 1].size() == (n / 2); currPair++)
+	{
+		if (currPair % 2 != 0)
+			continue ;
+		if (result[currPair].back() > result[currPair + 1].back())
+			std::swap(result[currPair], result[currPair + 1]);
+	}
+		
+	// debugResult(result, "Sequence: ", n);
+	this->executeFirstHalfD(n * 2);
+	return ;
+}
+
+
+
+void	PmergeMe::jacobsthalPushD(std::deque< std::deque<int> > &m,
+						std::deque< std::deque<int> > &p)
+{
+	std::deque<unsigned long>	b;
+	for (unsigned long	i = 2; i - 2 < p.size(); i++)
+		b.push_back(i);
+
+	
+	unsigned long	n = 2;
+	unsigned long	jacobNbr =  std::round((std::pow(2, n + 1) 
+						+ std::pow(-1, n)) / 3);
+	while (b.empty() == false && jacobNbr <= b.back())
+	{
+		unsigned long	i = 0;
+		while (b[i] < jacobNbr)
+			i++;
+		while (i >= 0)
+		{
+			unsigned long x = 0;
+			while (x < m.size()
+				&& p[i].back() > m[x].back())
+				x++;
+			m.insert(m.begin() + x, p[i]);
+			p.erase(p.begin() + i);
+			b.erase(b.begin() + i);
+
+			if (i == 0)
+				break;
+			i--;
+		}
+		
+		n++;
+		jacobNbr =  std::round((std::pow(2, n + 1) 
+		+ std::pow(-1, n)) / 3);
+	}
+	
+	
+	if (p.empty() == false)
+	{
+		for (unsigned long rev = p.size() - 1; rev >= 0; rev--)
+		{
+			unsigned long	x = 0;
+			while (x < m.size() && p[rev].back() > m[x].back())
+				x++;
+		m.insert(m.begin() + x, p[rev]);
+		p.erase(p.begin() + rev);
+		
+		if (rev == 0)
+			break;
+	}
+}
+
+	return ;
+}
+
+void	PmergeMe::adjustSequenceD(std::deque< std::deque<int> > sequence,
+									unsigned long &n, unsigned long call)
+{
+	std::deque< std::deque<int> >	newSequence;
+	std::deque<int> 				newPairdeque;
+	unsigned long					i;
+	unsigned long					currPair;
+	const unsigned long				pairSize = n / 2;
+
+	if (call == 1)
+	{
+		unsigned long	currPair = 0;
+		while (currPair < this->firstHalfSequenceD.size())
+		{
+			if (this->firstHalfSequenceD[currPair].size() != n / 2)
+				break ;
+			currPair++;
+		}
+		if (currPair > 2)
+			return ;
+	}
+
+	currPair = 0;
+	while (currPair < sequence.size())
+	{
+		i = 0;
+		while (i < sequence[currPair].size() && i < pairSize / 2)
+			newPairdeque.push_back(sequence[currPair][i++]);
+		newSequence.push_back(newPairdeque);
+		newPairdeque.clear();
+
+		while (i < sequence[currPair].size() && i < pairSize)
+			newPairdeque.push_back(sequence[currPair][i++]);
+		if (newPairdeque.empty() == false)
+			newSequence.push_back(newPairdeque);
+		newPairdeque.clear();
+
+		currPair++;
+	}
+	
+	n = n / 2;
+	this->firstHalfSequenceD = newSequence;
+}
+
+void	PmergeMe::executeSecondHalfD(unsigned long call)
+{
+	unsigned long	n = this->firstHalfSequenceD[0].size() * 2;
+	if (n / 2 < 2)
+	{
+		this->toBeSortedDeque.clear();
+
+		for (unsigned long i = 0; i < this->firstHalfSequenceD.size(); i++)
+			this->toBeSortedDeque.push_back(this->firstHalfSequenceD[i][0]);	
+		return ;
+	}
+	
+	adjustSequenceD(this->firstHalfSequenceD, n, call);
+	
+	// debugResult(this->firstHalfSequenceD, "[start]\t", n);
+	std::deque< std::deque<int> >	pendingChain;
+	std::deque< std::deque<int> >	mainChain;
+	mainChain.push_back(this->firstHalfSequenceD[0]);
+	for (unsigned long currPair = 1;
+			currPair < this->firstHalfSequenceD.size(); currPair++)
+	{
+		if (currPair % 2 == 0 && this->firstHalfSequenceD[currPair].size() == n / 2)
+			pendingChain.push_back(this->firstHalfSequenceD[currPair]);
+		else if (currPair % 2 != 0 && this->firstHalfSequenceD[currPair].size() == n / 2)
+			mainChain.push_back(this->firstHalfSequenceD[currPair]);
+	}
+
+	jacobsthalPushD(mainChain, pendingChain);
+
+	if (call == 1 && this->firstHalfSequenceD.back().size() != n / 2)
+		mainChain.push_back(this->firstHalfSequenceD.back());
+	this->firstHalfSequenceD = mainChain;
+	// debugResult(this->firstHalfSequence, "{end}||\t", n);
+	// std::cout << std::endl;
+	executeSecondHalfD(call + 1);
+	return ; 
+}
