@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/05 06:40:26 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 01:30:46 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,29 +173,54 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 }
 
 
-std::vector<unsigned long >	PmergeMe::jacobsthal(unsigned long  pSize)
+void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
+						std::vector< std::vector<int> > &p)
 {
-	std::vector<unsigned long > result;
-	if (pSize <= 0)
-		return (result);
+	unsigned long	jacobNbr = 3;
+	unsigned long	n = 4;
+	unsigned long	x = 2;
 
-	unsigned long  j0 = 0;
-	unsigned long  j1 = 1;
-
-	if (j1 <= pSize)
-		result.push_back(j1);
-
-	while (true)
+	while (jacobNbr <= p.size() + 2)
 	{
-		unsigned long  j2 = j1 + 2 * j0;
-		if (j2 > pSize)
-			break;
-		result.push_back(j2);
-		j0 = j1;
-		j1 = j2;
+		unsigned long	i = 0;
+		while (jacobNbr - x < p.size() && i < m.size()
+				&& p[jacobNbr - x].back() > m[i].back())
+			i++;
+		m.insert(m.begin() + i, p[jacobNbr - x]);
+		p.erase(p.begin() + jacobNbr - x);
+
+		x++;
+
+		if (jacobNbr == 3)
+		{
+			jacobNbr = 2;
+			x = 2;
+		}
+		else if (jacobNbr == 2)
+		{
+			jacobNbr = 5;
+			x = 4;
+		}
+		else
+		{
+			jacobNbr = std::round((std::pow(2, n + 1) 
+						+ std::pow(-1, n)) / 3);
+			n++;
+		}
+	}
+	if (p.empty() == false)
+	{
+		for (unsigned long rev = p.size(); rev < 0; rev--)
+		{
+			unsigned long	i = 0;
+			while (i < m.size() && p[rev].back() > m[i].back())
+				i++;
+			m.insert(m.begin() + i, p[rev]);
+			p.erase(p.begin() + rev);
+		}
 	}
 
-	return (result);
+	return;
 }
 
 void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
@@ -219,7 +244,7 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 		if (currPair > 2)
 			return ;
 	}
-	
+
 	newPairVector.reserve(pairSize / 2);
 	currPair = 0;
 	while (currPair < sequence.size())
@@ -232,7 +257,8 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 
 		while (i < sequence[currPair].size() && i < pairSize)
 			newPairVector.push_back(sequence[currPair][i++]);
-		newSequence.push_back(newPairVector);
+		if (newPairVector.empty() == false)
+			newSequence.push_back(newPairVector);
 		newPairVector.clear();
 
 		currPair++;
@@ -246,11 +272,11 @@ void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
 void	PmergeMe::executeSecondHalf(unsigned long call)
 {
 	unsigned long	n = this->firstHalfSequence[0].size() * 2;
-	if (n <= 2)
-		return ;
-
+	if (n / 2 < 2)
+	return ;
+	
 	adjustSequence(this->firstHalfSequence, n, call);
-
+	
 	debugResult(this->firstHalfSequence, "[start]\t", n);
 	std::vector< std::vector<int> >	pendingChain;
 	std::vector< std::vector<int> >	mainChain;
@@ -264,17 +290,8 @@ void	PmergeMe::executeSecondHalf(unsigned long call)
 			mainChain.push_back(this->firstHalfSequence[currPair]);
 	}
 
-	std::vector<unsigned long>	jacobNbr = jacobsthal(pendingChain.size());
-	while (jacobNbr.empty() == false)
-	{
-		unsigned long	i = 0;
-		while (pendingChain[jacobNbr.back() - 1].back() > mainChain[i].back())
-			i++;
-		mainChain.insert(mainChain.begin() + i, pendingChain[jacobNbr.back() - 1]);
-		pendingChain.erase(pendingChain.begin() + (jacobNbr.back() - 1));
-		jacobNbr.pop_back();
-	}
-	
+	jacobsthalPush(mainChain, pendingChain);
+
 	if (call == 1 && this->firstHalfSequence.back().size() != n / 2)
 		mainChain.push_back(this->firstHalfSequence.back());
 	this->firstHalfSequence = mainChain;

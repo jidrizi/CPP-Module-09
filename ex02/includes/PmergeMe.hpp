@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:59:40 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/05 04:17:55 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/06 23:43:56 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ class PmergeMe
 
 		void							adjustSequence(std::vector< std::vector<int> > sequence,
 											unsigned long &n, unsigned long call);
-		std::vector<unsigned long >		jacobsthal(unsigned long  pSize);
+		void							jacobsthalPush(std::vector< std::vector<int> > &m,
+											std::vector< std::vector<int> > &p);
 		void							executeSecondHalf(unsigned long jacobNbr);
 		void	debugResult(std::vector < std::vector<int> > result, std::string s, unsigned long n);
 };
