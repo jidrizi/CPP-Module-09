@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 05:16:27 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 05:27:47 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 	unsigned long	n = 2;
 	unsigned long	jacobNbr =  std::round((std::pow(2, n + 1) 
 						+ std::pow(-1, n)) / 3);
-	while (jacobNbr <= b.back())
+	while (b.empty() == false && jacobNbr <= b.back())
 	{
 		unsigned long	i = 0;
 		while (b[i] < jacobNbr)
@@ -200,6 +200,9 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 			m.insert(m.begin() + x, p[i]);
 			p.erase(p.begin() + i);
 			b.erase(b.begin() + i);
+
+			if (i == 0)
+				break;
 			i--;
 		}
 		
@@ -211,17 +214,20 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 	
 	if (p.empty() == false)
 	{
-		for (unsigned long rev = p.size(); rev > 0; rev--)
+		for (unsigned long rev = p.size() - 1; rev >= 0; rev--)
 		{
-			unsigned long	i = 0;
-			while (i < m.size() && p[rev].back() > m[i].back())
-			i++;
-		m.insert(m.begin() + i, p[rev]);
+			unsigned long	x = 0;
+			while (x < m.size() && p[rev].back() > m[x].back())
+				x++;
+		m.insert(m.begin() + x, p[rev]);
 		p.erase(p.begin() + rev);
+		
+		if (rev == 0)
+			break;
 	}
 }
 
-return ;
+	return ;
 }
 
 
