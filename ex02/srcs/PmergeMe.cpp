@@ -6,7 +6,7 @@
 /*   By: jidrizi <jidrizi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:28:49 by jidrizi           #+#    #+#             */
-/*   Updated: 2026/02/07 01:30:46 by jidrizi          ###   ########.fr       */
+/*   Updated: 2026/02/07 04:57:10 by jidrizi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,44 +173,41 @@ void	PmergeMe::executeFirstHalf(unsigned long n)
 }
 
 
+
 void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 						std::vector< std::vector<int> > &p)
 {
-	unsigned long	jacobNbr = 3;
-	unsigned long	n = 4;
-	unsigned long	x = 2;
+	std::vector<unsigned long>	b;
+	b.reserve(p.size());
+	for (unsigned long	i = 2; i - 2 < p.size(); i++)
+		b.push_back(i);
 
-	while (jacobNbr <= p.size() + 2)
-	{
-		unsigned long	i = 0;
-		while (jacobNbr - x < p.size() && i < m.size()
-				&& p[jacobNbr - x].back() > m[i].back())
-			i++;
-		m.insert(m.begin() + i, p[jacobNbr - x]);
-		p.erase(p.begin() + jacobNbr - x);
-
-		x++;
-
-		if (jacobNbr == 3)
-		{
-			jacobNbr = 2;
-			x = 2;
-		}
-		else if (jacobNbr == 2)
-		{
-			jacobNbr = 5;
-			x = 4;
-		}
-		else
-		{
-			jacobNbr = std::round((std::pow(2, n + 1) 
+	
+	unsigned long	n = 2;
+	unsigned long	jacobNbr =  std::round((std::pow(2, n + 1) 
 						+ std::pow(-1, n)) / 3);
-			n++;
+	while (jacobNbr <= b.back())
+	{
+		while (jacobNbr > 1)
+		{
+			unsigned long	i = 0;
+			while (jacobNbr - 2 < p.size() && i < m.size()
+					&& p[jacobNbr - 2].back() > m[i].back())
+				i++;
+			m.insert(m.begin() + i, p[jacobNbr - 2]);
+			p.erase(p.begin() + jacobNbr - 2);
+		
+			jacobNbr--;
 		}
+
+		n++;
+		jacobNbr =  std::round((std::pow(2, n + 1) 
+						+ std::pow(-1, n)) / 3);
 	}
+	
 	if (p.empty() == false)
 	{
-		for (unsigned long rev = p.size(); rev < 0; rev--)
+		for (unsigned long rev = p.size(); rev > 0; rev--)
 		{
 			unsigned long	i = 0;
 			while (i < m.size() && p[rev].back() > m[i].back())
@@ -219,8 +216,8 @@ void	PmergeMe::jacobsthalPush(std::vector< std::vector<int> > &m,
 			p.erase(p.begin() + rev);
 		}
 	}
-
-	return;
+	
+	return ;
 }
 
 void	PmergeMe::adjustSequence(std::vector< std::vector<int> > sequence,
